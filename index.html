@@ -4,534 +4,1386 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track Habit - Build Better Habits Every Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-primary: #0a0f0d;
+            --bg-secondary: #121a16;
+            --bg-card: #151d18;
+            --text-primary: #f5f2eb;
+            --text-secondary: #a8b5a0;
+            --accent: #c9a962;
+            --accent-light: #e4d4a3;
+            --accent-glow: rgba(201, 169, 98, 0.15);
+            --success: #5cb270;
+            --border: rgba(201, 169, 98, 0.12);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
             overflow-x: hidden;
+        }
+        
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 10000;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        nav.scrolled {
+            background: rgba(10, 15, 13, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.6em;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-style: italic;
+        }
+        
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-style: normal;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95em;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
+            position: relative;
+            padding: 140px 60px 100px;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 60%);
+            opacity: 0.5;
+        }
+        
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 50%;
+            height: 80%;
+            background: radial-gradient(ellipse at center, rgba(92, 178, 112, 0.08) 0%, transparent 60%);
+        }
+        
+        /* Floating orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-glow);
+            top: 10%;
+            right: 15%;
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(92, 178, 112, 0.1);
+            bottom: 20%;
+            left: 10%;
+            animation-delay: -3s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text {
+            max-width: 600px;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .hero-badge span {
+            color: var(--accent);
+        }
+        
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(3.5rem, 7vw, 5.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -0.02em;
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+            opacity: 0;
+        }
+        
+        h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        
+        .hero-description {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            max-width: 480px;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            opacity: 0;
+        }
+        
+        .btn {
+            padding: 18px 38px;
+            font-size: 1em;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--bg-primary);
+            box-shadow: 0 4px 30px var(--accent-glow), 0 0 0 0 var(--accent);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 40px rgba(201, 169, 98, 0.3), 0 0 0 4px rgba(201, 169, 98, 0.1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            animation: fadeInRight 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+        
+        .phone-mockup {
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .phone-frame {
+            background: linear-gradient(145deg, #2a3530 0%, #1a2420 100%);
+            border-radius: 50px;
+            padding: 12px;
+            box-shadow: 
+                0 50px 100px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .phone-screen {
+            background: var(--bg-secondary);
+            border-radius: 40px;
+            padding: 30px 24px;
+            min-height: 600px;
+            overflow: hidden;
+        }
+        
+        .phone-notch {
+            width: 120px;
+            height: 30px;
+            background: #1a2420;
+            border-radius: 20px;
+            margin: 0 auto 30px;
+        }
+        
+        .app-header {
             text-align: center;
-            color: white;
-            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+        
+        .app-header h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.4em;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+        
+        .app-header p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+        
+        .habit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        
+        .habit-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .habit-item:hover {
+            border-color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .habit-check {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+        
+        .habit-check.done {
+            background: var(--success);
+        }
+        
+        .habit-check.pending {
+            background: transparent;
+            border: 2px solid var(--border);
+        }
+        
+        .habit-info {
+            flex: 1;
+        }
+        
+        .habit-name {
+            font-weight: 500;
+            font-size: 0.95em;
+            margin-bottom: 3px;
+        }
+        
+        .habit-streak {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+        }
+        
+        .habit-streak span {
+            color: var(--accent);
+        }
+        
+        .progress-ring {
+            width: 44px;
+            height: 44px;
+            position: relative;
+        }
+        
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 4;
+        }
+        
+        .progress-ring .bg {
+            stroke: var(--border);
+        }
+        
+        .progress-ring .progress {
+            stroke: var(--accent);
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        
+        .progress-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.7em;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 100px 60px;
+            position: relative;
+        }
+        
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px 35px;
+            text-align: center;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
         
-        .hero::before {
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+        }
+        
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+        
+        .stat-number {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3.5em;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            letter-spacing: 0.02em;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 140px 60px;
+            position: relative;
+        }
+        
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 100px;
+        }
+        
+        .section-label {
+            display: inline-block;
+            color: var(--accent);
+            font-size: 0.9em;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+        
+        .section-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 1.15em;
+            line-height: 1.8;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 45px 38px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
-            opacity: 0.3;
-        }
-        
-        .hero-content {
-            max-width: 900px;
-            z-index: 1;
-            position: relative;
-        }
-        
-        .app-icon {
-            font-size: 120px;
-            margin-bottom: 20px;
-            animation: bounce 2s ease-in-out infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        h1 {
-            font-size: 4em;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .tagline {
-            font-size: 1.5em;
-            margin-bottom: 40px;
-            opacity: 0.95;
-            font-weight: 300;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-        
-        .btn {
-            padding: 18px 40px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        .btn-primary {
-            background: white;
-            color: #667eea;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        
-        .btn-secondary {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .btn-secondary:hover {
-            background: white;
-            color: #667eea;
-            transform: translateY(-5px);
-        }
-        
-        .app-store-badge {
-            margin-top: 30px;
-        }
-        
-        .app-store-badge img {
-            height: 60px;
-            transition: transform 0.3s ease;
-        }
-        
-        .app-store-badge img:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 100px 20px;
-            background: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.3em;
-            color: #666;
-            margin-bottom: 60px;
-        }
-        
-        .features-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-        
-        .feature-card {
-            padding: 40px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
         
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-card:hover::after {
+            opacity: 1;
+        }
+        
+        .feature-card > * {
+            position: relative;
+            z-index: 1;
         }
         
         .feature-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        .feature-card p {
-            color: #555;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        
-        /* Screenshots Section */
-        .screenshots {
-            padding: 100px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-        }
-        
-        .screenshots-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 60px;
-        }
-        
-        .screenshot-placeholder {
-            width: 250px;
-            height: 500px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 30px;
-            border: 3px solid rgba(255,255,255,0.3);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3em;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease;
+            font-size: 1.8em;
+            margin-bottom: 28px;
+            transition: all 0.4s ease;
         }
         
-        .screenshot-placeholder:hover {
-            transform: scale(1.05);
+        .feature-card:hover .feature-icon {
+            border-color: var(--accent);
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 1em;
+            line-height: 1.7;
         }
         
         /* Pricing Section */
         .pricing {
-            padding: 100px 20px;
-            background: white;
+            padding: 140px 60px;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+        
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 800px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+        
+        .pricing-container {
+            max-width: 1100px;
+            margin: 0 auto;
         }
         
         .pricing-cards {
-            max-width: 900px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 40px;
+            margin-top: 80px;
         }
         
         .pricing-card {
-            padding: 50px 30px;
-            border-radius: 20px;
-            background: white;
-            border: 3px solid #e0e0e0;
-            text-align: center;
-            transition: all 0.3s ease;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 50px 45px;
+            transition: all 0.5s ease;
+            position: relative;
         }
         
         .pricing-card.featured {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            transform: scale(1.05);
-            border: 3px solid #667eea;
+            border-color: var(--accent);
+            box-shadow: 0 0 60px var(--accent-glow);
         }
         
-        .pricing-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        .pricing-card.featured::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 30px;
+            right: 30px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            right: 40px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--bg-primary);
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 0.8em;
+            font-weight: 600;
         }
         
         .pricing-card h3 {
-            font-size: 2em;
-            margin-bottom: 10px;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
         }
         
-        .pricing-card .price {
-            font-size: 3em;
-            font-weight: 700;
-            margin: 20px 0;
+        .pricing-card.featured h3 {
+            color: var(--accent);
         }
         
-        .pricing-card .period {
-            font-size: 1.1em;
-            opacity: 0.8;
-            margin-bottom: 30px;
+        .price {
+            font-family: 'Instrument Serif', serif;
+            font-size: 4em;
+            font-weight: 400;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 5px;
         }
         
-        .pricing-card ul {
+        .price-period {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            margin-bottom: 35px;
+        }
+        
+        .pricing-features {
             list-style: none;
-            margin: 30px 0;
-            text-align: left;
+            margin-bottom: 40px;
         }
         
-        .pricing-card li {
-            padding: 10px 0;
-            font-size: 1.1em;
+        .pricing-features li {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--text-secondary);
         }
         
-        .pricing-card li::before {
-            content: "✓ ";
-            color: #4caf50;
-            font-weight: bold;
-            margin-right: 10px;
+        .pricing-features li:last-child {
+            border-bottom: none;
         }
         
-        .pricing-card.featured li::before {
-            color: white;
+        .pricing-features li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            background: rgba(92, 178, 112, 0.15);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--success);
+            font-size: 0.8em;
+            flex-shrink: 0;
+        }
+        
+        .pricing-card .btn {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 160px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.5;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta-section h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+        
+        .cta-section h2 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.2em;
+            margin-bottom: 45px;
+            line-height: 1.8;
         }
         
         /* Footer */
         .footer {
-            padding: 60px 20px;
-            background: #2c3e50;
-            color: white;
-            text-align: center;
+            padding: 80px 60px 40px;
+            border-top: 1px solid var(--border);
         }
         
-        .footer-links {
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .footer-main {
             display: flex;
-            gap: 30px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 30px 0;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 60px;
+        }
+        
+        .footer-brand {
+            max-width: 300px;
+        }
+        
+        .footer-brand .logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+        
+        .footer-links-group {
+            display: flex;
+            gap: 80px;
+        }
+        
+        .footer-links h4 {
+            color: var(--text-primary);
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 25px;
         }
         
         .footer-links a {
-            color: white;
+            display: block;
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 1.1em;
+            padding: 8px 0;
+            font-size: 0.95em;
             transition: color 0.3s ease;
         }
         
         .footer-links a:hover {
-            color: #667eea;
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-bottom p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
         }
         
         .social-links {
-            margin: 30px 0;
-            font-size: 2em;
+            display: flex;
+            gap: 15px;
         }
         
         .social-links a {
-            color: white;
-            margin: 0 15px;
+            width: 44px;
+            height: 44px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
             text-decoration: none;
-            transition: transform 0.3s ease;
-            display: inline-block;
+            transition: all 0.3s ease;
         }
         
         .social-links a:hover {
-            transform: scale(1.2);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
+        @media (max-width: 1200px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
             
-            .tagline {
-                font-size: 1.2em;
+            .hero-text {
+                max-width: 100%;
             }
             
-            .section-title {
-                font-size: 2em;
+            .hero-description {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
             }
             
-            .cta-buttons {
+            .hero-cta {
+                justify-content: center;
+            }
+            
+            .hero-visual {
+                display: none;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .nav-container,
+            .hero,
+            .stats,
+            .features,
+            .pricing,
+            .cta-section,
+            .footer {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-main {
                 flex-direction: column;
-                align-items: center;
+                gap: 50px;
             }
             
-            .btn {
-                width: 100%;
-                max-width: 300px;
+            .footer-links-group {
+                flex-wrap: wrap;
+                gap: 40px;
             }
         }
         
-        /* Scroll Animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">✓</div>
+                Track Habit
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="mailto:contact@trackhabit.app">Contact</a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-bg">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+        </div>
         <div class="hero-content">
-            <div class="app-icon">✅</div>
-            <h1>Track Habit</h1>
-            <p class="tagline">Build better habits, one day at a time</p>
-            <div class="cta-buttons">
-                <a href="#features" class="btn btn-primary">Learn More</a>
-                <a href="#pricing" class="btn btn-secondary">See Pricing</a>
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span>★</span> Rated 4.9 on App Store
+                </div>
+                <h1>Build habits that <em>actually</em> stick</h1>
+                <p class="hero-description">
+                    Transform your daily routine with a beautifully simple habit tracker. 
+                    Track progress, stay motivated, and become the best version of yourself.
+                </p>
+                <div class="hero-cta">
+                    <a href="#pricing" class="btn btn-primary">
+                        Get Started Free
+                        <span>→</span>
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        Explore Features
+                    </a>
+                </div>
             </div>
-            <div class="app-store-badge">
-                <a href="https://apps.apple.com" target="_blank">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='60' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' rx='10' fill='%23000'/%3E%3Ctext x='100' y='35' text-anchor='middle' fill='white' font-family='Arial' font-size='14' font-weight='bold'%3EDownload on the App Store%3C/text%3E%3C/svg%3E" alt="Download on the App Store">
-                </a>
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="phone-notch"></div>
+                            <div class="app-header">
+                                <h3>Today's Progress</h3>
+                                <p>4 of 6 habits completed</p>
+                            </div>
+                            <div class="habit-list">
+                                <div class="habit-item">
+                                    <div class="habit-check done">✓</div>
+                                    <div class="habit-info">
+                                        <div class="habit-name">Morning Meditation</div>
+                                        <div class="habit-streak"><span>🔥 12</span> day streak</div>
+                                    </div>
+                                    <div class="progress-ring">
+                                        <svg width="44" height="44">
+                                            <circle class="bg" cx="22" cy="22" r="18"></circle>
+                                            <circle class="progress" cx="22" cy="22" r="18" 
+                                                stroke-dasharray="113" stroke-dashoffset="0"></circle>
+                                        </svg>
+                                        <span class="progress-value">100%</span>
+                                    </div>
+                                </div>
+                                <div class="habit-item">
+                                    <div class="habit-check done">✓</div>
+                                    <div class="habit-info">
+                                        <div class="habit-name">Read 30 minutes</div>
+                                        <div class="habit-streak"><span>🔥 8</span> day streak</div>
+                                    </div>
+                                    <div class="progress-ring">
+                                        <svg width="44" height="44">
+                                            <circle class="bg" cx="22" cy="22" r="18"></circle>
+                                            <circle class="progress" cx="22" cy="22" r="18" 
+                                                stroke-dasharray="113" stroke-dashoffset="0"></circle>
+                                        </svg>
+                                        <span class="progress-value">100%</span>
+                                    </div>
+                                </div>
+                                <div class="habit-item">
+                                    <div class="habit-check done">✓</div>
+                                    <div class="habit-info">
+                                        <div class="habit-name">Exercise</div>
+                                        <div class="habit-streak"><span>🔥 21</span> day streak</div>
+                                    </div>
+                                    <div class="progress-ring">
+                                        <svg width="44" height="44">
+                                            <circle class="bg" cx="22" cy="22" r="18"></circle>
+                                            <circle class="progress" cx="22" cy="22" r="18" 
+                                                stroke-dasharray="113" stroke-dashoffset="0"></circle>
+                                        </svg>
+                                        <span class="progress-value">100%</span>
+                                    </div>
+                                </div>
+                                <div class="habit-item">
+                                    <div class="habit-check done">✓</div>
+                                    <div class="habit-info">
+                                        <div class="habit-name">Drink 8 glasses of water</div>
+                                        <div class="habit-streak"><span>🔥 5</span> day streak</div>
+                                    </div>
+                                    <div class="progress-ring">
+                                        <svg width="44" height="44">
+                                            <circle class="bg" cx="22" cy="22" r="18"></circle>
+                                            <circle class="progress" cx="22" cy="22" r="18" 
+                                                stroke-dasharray="113" stroke-dashoffset="0"></circle>
+                                        </svg>
+                                        <span class="progress-value">100%</span>
+                                    </div>
+                                </div>
+                                <div class="habit-item">
+                                    <div class="habit-check pending"></div>
+                                    <div class="habit-info">
+                                        <div class="habit-name">Journal</div>
+                                        <div class="habit-streak"><span>🔥 3</span> day streak</div>
+                                    </div>
+                                    <div class="progress-ring">
+                                        <svg width="44" height="44">
+                                            <circle class="bg" cx="22" cy="22" r="18"></circle>
+                                            <circle class="progress" cx="22" cy="22" r="18" 
+                                                stroke-dasharray="113" stroke-dashoffset="113"></circle>
+                                        </svg>
+                                        <span class="progress-value">0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Happy Users</div>
+                </div>
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">1M+</div>
+                    <div class="stat-label">Habits Tracked</div>
+                </div>
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">4.9</div>
+                    <div class="stat-label">App Store Rating</div>
+                </div>
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">92%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
     <section id="features" class="features">
-        <h2 class="section-title fade-in">Why Track Habit?</h2>
-        <p class="section-subtitle fade-in">Everything you need to build lasting habits</p>
-        <div class="features-grid">
-            <div class="feature-card fade-in">
-                <div class="feature-icon">📊</div>
-                <h3>Beautiful Stats</h3>
-                <p>Visualize your progress with intuitive charts and insights. See your streaks, completion rates, and patterns at a glance.</p>
+        <div class="features-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Features</span>
+                <h2 class="section-title">Everything you need to build <em>lasting</em> habits</h2>
+                <p class="section-description">
+                    Powerful tools wrapped in a beautiful, intuitive interface designed to keep you motivated every day.
+                </p>
             </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🔔</div>
-                <h3>Smart Reminders</h3>
-                <p>Never forget a habit with customizable notifications. Set multiple reminders throughout the day.</p>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">📊</div>
+                    <h3>Beautiful Analytics</h3>
+                    <p>Visualize your progress with stunning charts and insights. Understand your patterns and celebrate your wins.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Smart Reminders</h3>
+                    <p>Intelligent notifications that adapt to your schedule. Never miss a habit with customizable alerts.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">☁️</div>
+                    <h3>iCloud Sync</h3>
+                    <p>Seamlessly sync across all your devices. Your habits follow you wherever you go.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Flexible Goals</h3>
+                    <p>Set daily, weekly, or custom schedules. Track habits exactly the way that works for you.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">📱</div>
+                    <h3>Home Screen Widgets</h3>
+                    <p>Quick glance at your progress right from your home screen with beautiful, customizable widgets.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>Your data stays private. No tracking, no ads, no selling your personal information. Ever.</p>
+                </div>
             </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">☁️</div>
-                <h3>iCloud Sync</h3>
-                <p>Seamlessly sync your habits across all your Apple devices. Your data is always up to date.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🎯</div>
-                <h3>Flexible Goals</h3>
-                <p>Set daily, weekly, or custom frequency goals. Track habits your way.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🎨</div>
-                <h3>Beautiful Design</h3>
-                <p>Enjoy a clean, modern interface that makes tracking habits a pleasure.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🔒</div>
-                <h3>Privacy First</h3>
-                <p>Your data stays yours. No tracking, no ads, no selling your information.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Screenshots Section -->
-    <section class="screenshots">
-        <h2 class="section-title">See It In Action</h2>
-        <p class="section-subtitle">A glimpse of Track Habit</p>
-        <div class="screenshots-container">
-            <div class="screenshot-placeholder">📱</div>
-            <div class="screenshot-placeholder">📊</div>
-            <div class="screenshot-placeholder">✅</div>
         </div>
     </section>
 
     <!-- Pricing Section -->
     <section id="pricing" class="pricing">
-        <h2 class="section-title fade-in">Simple Pricing</h2>
-        <p class="section-subtitle fade-in">Choose the plan that works for you</p>
-        <div class="pricing-cards">
-            <div class="pricing-card fade-in">
-                <h3>Free</h3>
-                <div class="price">$0</div>
-                <div class="period">Forever</div>
-                <ul>
-                    <li>Up to 3 habits</li>
-                    <li>Basic statistics</li>
-                    <li>Daily reminders</li>
-                    <li>iCloud sync</li>
-                </ul>
-                <a href="#" class="btn btn-secondary">Get Started</a>
+        <div class="pricing-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Pricing</span>
+                <h2 class="section-title">Simple, <em>transparent</em> pricing</h2>
+                <p class="section-description">
+                    Start for free, upgrade when you're ready. No hidden fees, cancel anytime.
+                </p>
             </div>
-            <div class="pricing-card featured fade-in">
-                <h3>Pro</h3>
-                <div class="price">$2.99</div>
-                <div class="period">per month</div>
-                <ul>
-                    <li>Unlimited habits</li>
-                    <li>Advanced statistics</li>
-                    <li>Multiple reminders</li>
-                    <li>Custom themes</li>
-                    <li>Widget support</li>
-                    <li>Export data</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Go Pro</a>
+            <div class="pricing-cards">
+                <div class="pricing-card animate-on-scroll">
+                    <h3>Free</h3>
+                    <div class="price">$0</div>
+                    <div class="price-period">Forever free</div>
+                    <ul class="pricing-features">
+                        <li>Up to 3 habits</li>
+                        <li>Basic statistics</li>
+                        <li>Daily reminders</li>
+                        <li>iCloud sync</li>
+                        <li>Light & dark mode</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Get Started</a>
+                </div>
+                <div class="pricing-card featured animate-on-scroll">
+                    <span class="pricing-badge">Most Popular</span>
+                    <h3>Pro</h3>
+                    <div class="price">$2.99</div>
+                    <div class="price-period">per month</div>
+                    <ul class="pricing-features">
+                        <li>Unlimited habits</li>
+                        <li>Advanced statistics</li>
+                        <li>Multiple reminders</li>
+                        <li>Custom themes</li>
+                        <li>Widget support</li>
+                        <li>Export data</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Start Free Trial</a>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content animate-on-scroll">
+            <h2>Ready to transform your <em>habits?</em></h2>
+            <p>Join thousands of people who are building better lives, one habit at a time.</p>
+            <a href="#pricing" class="btn btn-primary">
+                Get Started Free
+                <span>→</span>
+            </a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <h3>Track Habit</h3>
-        <p style="margin: 20px 0; opacity: 0.8;">Building better habits, together.</p>
-        
-        <div class="footer-links">
-            <a href="privacy-policy.html">Privacy Policy</a>
-            <a href="terms-of-service.html">Terms of Service</a>
-            <a href="mailto:AndriyPopovich_temp@icloud.com">Contact Support</a>
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">✓</div>
+                        Track Habit
+                    </a>
+                    <p>Building better habits, one day at a time. Start your journey to a better you.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-links">
+                        <h4>Product</h4>
+                        <a href="#features">Features</a>
+                        <a href="#pricing">Pricing</a>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Legal</h4>
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Service</a>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Support</h4>
+                        <a href="mailto:contact@trackhabit.app">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Andriy Popovich. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="mailto:contact@trackhabit.app" title="Email">✉️</a>
+                </div>
+            </div>
         </div>
-        
-        <div class="social-links">
-            <a href="#" title="Twitter">🐦</a>
-            <a href="#" title="Instagram">📷</a>
-            <a href="mailto:AndriyPopovich_temp@icloud.com" title="Email">✉️</a>
-        </div>
-        
-        <p style="margin-top: 30px; opacity: 0.7;">© 2025 Andriy Popovich. All rights reserved.</p>
     </footer>
 
     <script>
-        // Smooth scrolling
+        // Navbar scroll effect
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const offset = 80;
+                    window.scrollTo({
+                        top: target.offsetTop - offset,
+                        behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Fade-in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Scroll animations
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
                 }
             });
-        }, observerOptions);
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
 
-        document.querySelectorAll('.fade-in').forEach(el => {
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
     </script>
