@@ -4,173 +4,373 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track Habit - Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --accent: #667eea;
+            --accent-dark: #764ba2;
+            --accent-light: #8b9df0;
+            --accent-glow: rgba(102, 126, 234, 0.15);
+            --success: #5cb270;
+            --warning: #f59e0b;
+            --border: rgba(102, 126, 234, 0.15);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
+        html {
+            scroll-behavior: smooth;
         }
         
-        .container {
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .page-header {
+            background: var(--gradient);
+            padding: 120px 60px 80px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
             max-width: 800px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
         
-        .header {
-            text-align: center;
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.95em;
             margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #667eea;
+            transition: color 0.3s ease;
         }
         
-        .app-icon {
-            font-size: 60px;
-            margin-bottom: 10px;
+        .back-link:hover {
+            color: white;
+        }
+        
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.4em;
+            color: white;
+            text-decoration: none;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-style: normal;
+            backdrop-filter: blur(10px);
         }
         
         h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
         }
         
         .last-updated {
-            color: #666;
-            font-size: 0.9em;
-            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95em;
         }
         
+        /* Main Content */
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px;
+            background: white;
+            margin-top: -40px;
+            border-radius: 24px 24px 0 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* TL;DR Box */
+        .tldr {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 50px;
+        }
+        
+        .tldr-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .tldr-header h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5em;
+            font-weight: 400;
+            color: var(--warning);
+            margin: 0;
+        }
+        
+        .tldr p {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        
+        .tldr ul {
+            margin: 0;
+            padding-left: 25px;
+        }
+        
+        .tldr li {
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        
+        /* Section Styles */
         h2 {
-            color: #333;
+            font-family: 'Instrument Serif', serif;
             font-size: 1.8em;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
         h3 {
-            color: #555;
-            font-size: 1.3em;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 30px;
+            margin-bottom: 15px;
         }
         
         p {
-            margin-bottom: 15px;
-            text-align: justify;
+            color: var(--text-secondary);
+            margin-bottom: 18px;
         }
         
         ul {
-            margin: 15px 0;
-            padding-left: 30px;
+            margin: 15px 0 25px;
+            padding-left: 25px;
         }
         
         li {
-            margin-bottom: 8px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
         }
         
+        li strong {
+            color: var(--text-primary);
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-dark);
+        }
+        
+        /* Highlight Box */
         .highlight-box {
-            background: #f0f4ff;
-            border-left: 4px solid #667eea;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
+            background: var(--accent-glow);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 16px 16px 0;
+            padding: 25px 30px;
+            margin: 25px 0;
         }
         
-        .tldr {
-            background: #fff8e1;
-            border: 2px solid #ffd54f;
-            padding: 20px;
-            margin: 30px 0;
-            border-radius: 12px;
+        .highlight-box p {
+            margin-bottom: 12px;
         }
         
-        .tldr h3 {
-            color: #f57c00;
-            margin-top: 0;
+        .highlight-box p:last-child {
+            margin-bottom: 0;
         }
         
+        .highlight-box ul {
+            margin-bottom: 0;
+        }
+        
+        /* Contact Box */
         .contact-box {
-            background: #e8f5e9;
-            border: 2px solid #4caf50;
-            padding: 20px;
-            margin: 30px 0;
-            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(92, 178, 112, 0.1) 0%, rgba(92, 178, 112, 0.05) 100%);
+            border: 1px solid rgba(92, 178, 112, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
             text-align: center;
         }
         
+        .contact-box h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5em;
+            font-weight: 400;
+            color: var(--success);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .contact-box p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        
         .contact-box a {
-            color: #2e7d32;
-            font-weight: bold;
-            text-decoration: none;
+            color: var(--success);
+            font-weight: 600;
             font-size: 1.1em;
         }
         
         .contact-box a:hover {
-            text-decoration: underline;
+            color: #4a9960;
         }
         
-        .emoji {
-            font-style: normal;
-        }
-        
-        a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
+        /* Footer */
         .footer {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 60px 60px;
+            background: white;
             text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px solid #eee;
-            color: #666;
+            border-top: 1px solid var(--border);
         }
         
+        .footer p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
+            .page-header {
+                padding: 100px 30px 60px;
+            }
+            
+            .content {
+                padding: 40px 30px;
+                margin-top: -30px;
+            }
+            
+            .footer {
+                padding: 30px;
             }
             
             h1 {
-                font-size: 2em;
+                font-size: 2rem;
             }
             
             h2 {
                 font-size: 1.5em;
             }
+            
+            .tldr {
+                padding: 25px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="app-icon">✅</div>
-            <h1>Track Habit</h1>
-            <p style="font-size: 1.2em; color: #667eea; margin: 10px 0;">Privacy Policy</p>
+    <header class="page-header">
+        <div class="header-content">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            <div>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">✓</div>
+                    Track Habit
+                </a>
+            </div>
+            <h1>Privacy Policy</h1>
             <p class="last-updated">Last Updated: January 5, 2025</p>
         </div>
+    </header>
 
+    <main class="content">
         <div class="tldr">
-            <h3><span class="emoji">📝</span> Summary (TL;DR)</h3>
-            <p><strong>What we collect:</strong></p>
+            <div class="tldr-header">
+                <span style="font-size: 1.5em;">🔐</span>
+                <h3>Summary (TL;DR)</h3>
+            </div>
+            
+            <p>What we collect:</p>
             <ul>
                 <li>Your habit data (stored locally and in your iCloud)</li>
                 <li>Subscription status</li>
@@ -178,21 +378,24 @@
                 <li>Crash reports (optional)</li>
             </ul>
             
-            <p><strong>What we DON'T do:</strong></p>
+            <p>What we DON'T do:</p>
             <ul>
-                <li><span class="emoji">❌</span> Sell your data</li>
-                <li><span class="emoji">❌</span> Show ads</li>
-                <li><span class="emoji">❌</span> Track you</li>
-                <li><span class="emoji">❌</span> Share with third parties</li>
+                <li>❌ Sell your data</li>
+                <li>❌ Show ads</li>
+                <li>❌ Track you</li>
+                <li>❌ Share with third parties</li>
             </ul>
             
-            <p><strong><span class="emoji">🔒</span> Security:</strong> Your data is encrypted and stored in your private iCloud. We have no access to it.</p>
+            <p>🔒 Security:</p>
+            <ul>
+                <li>Your data is encrypted and stored in your private iCloud. We have no access to it.</li>
+            </ul>
         </div>
 
-        <h2><span class="emoji">👋</span> Introduction</h2>
+        <h2>👋 Introduction</h2>
         <p>Track Habit ("we", "our", or "us") respects your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our mobile application.</p>
 
-        <h2><span class="emoji">📊</span> Information We Collect</h2>
+        <h2>📊 Information We Collect</h2>
 
         <h3>1. Data You Provide</h3>
         <div class="highlight-box">
@@ -213,14 +416,14 @@
             <li><strong>Usage Data:</strong> App crashes and errors (optional, anonymous)</li>
         </ul>
 
-        <h2><span class="emoji">🎯</span> How We Use Your Information</h2>
+        <h2>🎯 How We Use Your Information</h2>
         
         <h3>Core App Functionality</h3>
         <ul>
-            <li><span class="emoji">✅</span> <strong>Store your habits:</strong> Save and manage your habit data locally</li>
-            <li><span class="emoji">☁️</span> <strong>Sync across devices:</strong> If you enable iCloud, sync your data across your Apple devices</li>
-            <li><span class="emoji">💳</span> <strong>Manage subscriptions:</strong> Verify your Pro subscription status</li>
-            <li><span class="emoji">🔔</span> <strong>Send notifications:</strong> Deliver reminders for your habits (with your permission)</li>
+            <li>✅ <strong>Store your habits:</strong> Save and manage your habit data locally</li>
+            <li>☁️ <strong>Sync across devices:</strong> If you enable iCloud, sync your data across your Apple devices</li>
+            <li>💳 <strong>Manage subscriptions:</strong> Verify your Pro subscription status</li>
+            <li>🔔 <strong>Send notifications:</strong> Deliver reminders for your habits (with your permission)</li>
         </ul>
 
         <h3>App Improvement</h3>
@@ -230,7 +433,7 @@
             <li>Enhance existing features</li>
         </ul>
 
-        <h2><span class="emoji">🔒</span> Data Storage and Security</h2>
+        <h2>🔒 Data Storage and Security</h2>
 
         <h3>Local Storage</h3>
         <p>All your habit data is stored locally on your device using SwiftData, Apple's modern data persistence framework.</p>
@@ -254,16 +457,16 @@
             <li>We never see your credit card or payment details</li>
         </ul>
 
-        <h2><span class="emoji">🤝</span> Data Sharing and Disclosure</h2>
+        <h2>🤝 Data Sharing and Disclosure</h2>
 
         <div class="highlight-box">
             <p><strong>We do NOT:</strong></p>
             <ul>
-                <li><span class="emoji">❌</span> Sell your personal data to third parties</li>
-                <li><span class="emoji">❌</span> Share your data with advertisers</li>
-                <li><span class="emoji">❌</span> Use your data for marketing purposes</li>
-                <li><span class="emoji">❌</span> Track you across apps or websites</li>
-                <li><span class="emoji">❌</span> Collect data for third-party analytics</li>
+                <li>❌ Sell your personal data to third parties</li>
+                <li>❌ Share your data with advertisers</li>
+                <li>❌ Use your data for marketing purposes</li>
+                <li>❌ Track you across apps or websites</li>
+                <li>❌ Collect data for third-party analytics</li>
             </ul>
         </div>
 
@@ -274,7 +477,7 @@
             <li>With your explicit consent</li>
         </ul>
 
-        <h2><span class="emoji">🍎</span> Third-Party Services</h2>
+        <h2>🍎 Third-Party Services</h2>
 
         <h3>Apple Services</h3>
         <p>We use the following Apple frameworks and services:</p>
@@ -289,7 +492,7 @@
         <h3>No Other Third Parties</h3>
         <p>We do not integrate any third-party analytics, advertising, or tracking services.</p>
 
-        <h2><span class="emoji">⚖️</span> Your Privacy Rights</h2>
+        <h2>⚖️ Your Privacy Rights</h2>
 
         <h3>Access Your Data</h3>
         <p>All your data is accessible within the app at any time.</p>
@@ -308,42 +511,42 @@
         <h3>Manage Subscriptions</h3>
         <p>You can manage or cancel your subscriptions at any time through iOS Settings → [Your Name] → Subscriptions.</p>
 
-        <h2><span class="emoji">👶</span> Children's Privacy</h2>
+        <h2>👶 Children's Privacy</h2>
         <p>Track Habit is rated 4+ and is safe for all ages. We do not knowingly collect personal information from children under 13.</p>
 
-        <h2><span class="emoji">🌍</span> International Users</h2>
+        <h2>🌍 International Users</h2>
         <p>Track Habit is available worldwide. Your data is stored locally on your device and optionally in iCloud (Apple's data centers).</p>
 
-        <h2><span class="emoji">🔐</span> Security Measures</h2>
+        <h2>🔐 Security Measures</h2>
         <p>We implement industry-standard security measures:</p>
         <ul>
-            <li><span class="emoji">✅</span> Data encryption (HTTPS, iCloud encryption)</li>
-            <li><span class="emoji">✅</span> Secure data storage (iOS Keychain for sensitive data)</li>
-            <li><span class="emoji">✅</span> Regular security updates</li>
-            <li><span class="emoji">✅</span> Minimal data collection</li>
+            <li>✅ Data encryption (HTTPS, iCloud encryption)</li>
+            <li>✅ Secure data storage (iOS Keychain for sensitive data)</li>
+            <li>✅ Regular security updates</li>
+            <li>✅ Minimal data collection</li>
         </ul>
 
-        <h2><span class="emoji">📝</span> Changes to This Policy</h2>
+        <h2>📝 Changes to This Policy</h2>
         <p>We may update this privacy policy from time to time. Changes will be effective when posted. Your continued use of the app after changes constitutes acceptance of the updated policy.</p>
 
         <div class="contact-box">
-            <h3><span class="emoji">📧</span> Contact Us</h3>
+            <h3>📧 Contact Us</h3>
             <p>If you have any questions or concerns about this privacy policy:</p>
             <p><a href="mailto:AndriyPopovich_temp@icloud.com">AndriyPopovich_temp@icloud.com</a></p>
-            <p style="margin-top: 10px; font-size: 0.9em; color: #666;">We aim to respond within 48 hours.</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">We aim to respond within 48 hours.</p>
         </div>
 
-        <h2><span class="emoji">✅</span> Consent</h2>
+        <h2>✅ Consent</h2>
         <p>By using Track Habit, you consent to this privacy policy and agree to its terms.</p>
+    </main>
 
-        <div class="footer">
-            <p><strong>Track Habit</strong></p>
-            <p>© 2025 Andriy Popovich. All rights reserved.</p>
-            <p style="margin-top: 20px;">
-                <a href="mailto:AndriyPopovich_temp@icloud.com">Contact Support</a> | 
-                <a href="#">Terms of Service</a>
-            </p>
+    <footer class="footer">
+        <p><strong>Track Habit</strong></p>
+        <p>© 2025 Andriy Popovich. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-service.html">Terms of Service</a>
         </div>
-    </div>
+    </footer>
 </body>
 </html>
