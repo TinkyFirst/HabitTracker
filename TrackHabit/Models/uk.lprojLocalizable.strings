@@ -1,0 +1,207 @@
+/* 
+  Localizable.strings (Ukrainian)
+  Achievements localization
+*/
+
+// MARK: - General
+"achievements.title" = "Досягнення";
+"achievements.unlocked" = "Розблоковано!";
+"achievements.of" = "з";
+"achievements.done" = "Готово";
+"achievements.progress" = "Прогрес";
+"achievements.unlocked_on" = "Розблоковано";
+"achievements.category" = "Категорія";
+"achievements.rarity" = "Рідкість";
+"achievements.requirement" = "Вимога";
+"achievement.unlocked" = "Досягнення Розблоковано";
+
+// MARK: - Categories
+"achievement.category.all" = "Всі";
+"achievement.category.streaks" = "Серії";
+"achievement.category.completions" = "Виконання";
+"achievement.category.habits" = "Звички";
+"achievement.category.consistency" = "Постійність";
+"achievement.category.milestones" = "Віхи";
+"achievement.category.special" = "Спеціальні";
+
+// MARK: - Rarity
+"achievements.common" = "Звичайні";
+"achievements.rare" = "Рідкісні";
+"achievements.legendary" = "Легендарні";
+
+"achievements.rarity.common" = "Звичайне";
+"achievements.rarity.uncommon" = "Незвичайне";
+"achievements.rarity.rare" = "Рідкісне";
+"achievements.rarity.epic" = "Епічне";
+"achievements.rarity.legendary" = "Легендарне";
+
+// MARK: - First Steps (5)
+"achievement.first_habit.title" = "Перша Звичка";
+"achievement.first_habit.description" = "Створіть свою першу звичку";
+
+"achievement.first_checkin.title" = "Перший Крок";
+"achievement.first_checkin.description" = "Виконайте звичку вперше";
+
+"achievement.three_habits.title" = "Три Звички";
+"achievement.three_habits.description" = "Створіть 3 звички";
+
+"achievement.five_habits.title" = "П'ять Звичок";
+"achievement.five_habits.description" = "Створіть 5 звичок";
+
+"achievement.ten_habits.title" = "Десять Звичок";
+"achievement.ten_habits.description" = "Створіть 10 звичок";
+
+// MARK: - Streaks (10)
+"achievement.streak_3.title" = "🔥 3 Дні Підряд";
+"achievement.streak_3.description" = "Підтримуйте серію 3 дні";
+
+"achievement.streak_7.title" = "🔥 Тиждень Вогню";
+"achievement.streak_7.description" = "Підтримуйте серію 7 днів";
+
+"achievement.streak_14.title" = "🔥 Два Тижні";
+"achievement.streak_14.description" = "Підтримуйте серію 14 днів";
+
+"achievement.streak_21.title" = "🔥 Три Тижні";
+"achievement.streak_21.description" = "Підтримуйте серію 21 день";
+
+"achievement.streak_30.title" = "🔥 Місяць Сили";
+"achievement.streak_30.description" = "Підтримуйте серію 30 днів";
+
+"achievement.streak_50.title" = "🔥 П'ятдесят Днів";
+"achievement.streak_50.description" = "Підтримуйте серію 50 днів";
+
+"achievement.streak_100.title" = "🔥 Сотня";
+"achievement.streak_100.description" = "Підтримуйте серію 100 днів";
+
+"achievement.streak_200.title" = "✨ Двісті Днів";
+"achievement.streak_200.description" = "Підтримуйте серію 200 днів";
+
+"achievement.streak_365.title" = "👑 Рік Досконалості";
+"achievement.streak_365.description" = "Підтримуйте серію цілий рік";
+
+"achievement.streak_500.title" = "👑 П'ятсот Днів";
+"achievement.streak_500.description" = "Підтримуйте серію 500 днів";
+
+// MARK: - Completions (10)
+"achievement.checkins_10.title" = "Десять Разів";
+"achievement.checkins_10.description" = "Виконайте 10 відміток";
+
+"achievement.checkins_25.title" = "Двадцять П'ять";
+"achievement.checkins_25.description" = "Виконайте 25 відміток";
+
+"achievement.checkins_50.title" = "П'ятдесят";
+"achievement.checkins_50.description" = "Виконайте 50 відміток";
+
+"achievement.checkins_100.title" = "Сотня Виконань";
+"achievement.checkins_100.description" = "Виконайте 100 відміток";
+
+"achievement.checkins_250.title" = "Двісті П'ятдесят";
+"achievement.checkins_250.description" = "Виконайте 250 відміток";
+
+"achievement.checkins_500.title" = "П'ятсот Виконань";
+"achievement.checkins_500.description" = "Виконайте 500 відміток";
+
+"achievement.checkins_1000.title" = "Тисяча";
+"achievement.checkins_1000.description" = "Виконайте 1000 відміток";
+
+"achievement.checkins_2000.title" = "Дві Тисячі";
+"achievement.checkins_2000.description" = "Виконайте 2000 відміток";
+
+"achievement.checkins_5000.title" = "П'ять Тисяч";
+"achievement.checkins_5000.description" = "Виконайте 5000 відміток";
+
+"achievement.checkins_10000.title" = "Десять Тисяч";
+"achievement.checkins_10000.description" = "Виконайте 10000 відміток";
+
+// MARK: - Consistency (10)
+"achievement.perfect_week.title" = "Ідеальний Тиждень";
+"achievement.perfect_week.description" = "Виконайте всі звички 7 днів підряд";
+
+"achievement.perfect_month.title" = "Ідеальний Місяць";
+"achievement.perfect_month.description" = "Виконайте всі звички 30 днів підряд";
+
+"achievement.early_bird.title" = "Рання Пташка";
+"achievement.early_bird.description" = "7 відміток до 8 ранку";
+
+"achievement.night_owl.title" = "Нічна Сова";
+"achievement.night_owl.description" = "7 відміток після 10 вечора";
+
+"achievement.weekend_warrior.title" = "Воїн Вихідних";
+"achievement.weekend_warrior.description" = "10 ідеальних вихідних";
+
+"achievement.all_habits_day.title" = "Всі Звички За День";
+"achievement.all_habits_day.description" = "Виконайте всі звички в один день";
+
+"achievement.comeback_kid.title" = "Повернення";
+"achievement.comeback_kid.description" = "Відновіть серію після перерви";
+
+"achievement.no_skip_month.title" = "Без Пропусків";
+"achievement.no_skip_month.description" = "Щонайменше одна відмітка кожен день протягом місяця";
+
+"achievement.goal_crusher.title" = "Руйнівник Цілей";
+"achievement.goal_crusher.description" = "Досягніть 10 цілей";
+
+"achievement.overachiever.title" = "Надвиконавець";
+"achievement.overachiever.description" = "Перевищте цілі на 150% - 50 разів";
+
+// MARK: - Milestones (10)
+"achievement.one_week.title" = "Перший Тиждень";
+"achievement.one_week.description" = "Використовуйте додаток 7 днів";
+
+"achievement.one_month.title" = "Перший Місяць";
+"achievement.one_month.description" = "Використовуйте додаток 30 днів";
+
+"achievement.three_months.title" = "Три Місяці";
+"achievement.three_months.description" = "Використовуйте додаток 90 днів";
+
+"achievement.six_months.title" = "Півроку";
+"achievement.six_months.description" = "Використовуйте додаток 180 днів";
+
+"achievement.one_year.title" = "Один Рік";
+"achievement.one_year.description" = "Використовуйте додаток цілий рік";
+
+"achievement.two_years.title" = "Два Роки";
+"achievement.two_years.description" = "Використовуйте додаток 2 роки";
+
+"achievement.habit_master.title" = "Майстер Звичок";
+"achievement.habit_master.description" = "Серія 100 днів для однієї звички";
+
+"achievement.dedication.title" = "Відданість";
+"achievement.dedication.description" = "Підтримуйте 3+ звички протягом 90 днів";
+
+"achievement.resilient.title" = "Стійкість";
+"achievement.resilient.description" = "Відновіть серію 5 разів";
+
+"achievement.legendary_status.title" = "Легендарний Статус";
+"achievement.legendary_status.description" = "Розблокуйте 40 інших досягнень";
+
+// MARK: - Special (10)
+"achievement.new_year_new_me.title" = "Новий Рік, Нове Я";
+"achievement.new_year_new_me.description" = "Створіть звичку 1 січня";
+
+"achievement.birthday_celebration.title" = "День Народження";
+"achievement.birthday_celebration.description" = "Виконайте звичку у свій день народження";
+
+"achievement.leap_day.title" = "Високосний День";
+"achievement.leap_day.description" = "Виконайте звичку 29 лютого";
+
+"achievement.midnight_warrior.title" = "Опівнічний Воїн";
+"achievement.midnight_warrior.description" = "Виконайте звичку о півночі";
+
+"achievement.multitasker.title" = "Багатозадачність";
+"achievement.multitasker.description" = "5+ звичок за один день";
+
+"achievement.speed_demon.title" = "Швидкісний Демон";
+"achievement.speed_demon.description" = "10 відміток за годину";
+
+"achievement.social_butterfly.title" = "Соціальний Метелик";
+"achievement.social_butterfly.description" = "Поділіться досягненням";
+
+"achievement.collector.title" = "Колекціонер";
+"achievement.collector.description" = "Розблокуйте 25 досягнень";
+
+"achievement.perfectionist.title" = "Перфекціоніст";
+"achievement.perfectionist.description" = "100% виконання протягом 30 днів";
+
+"achievement.unlock_all.title" = "Абсолютна Перемога";
+"achievement.unlock_all.description" = "Розблокуйте всі інші досягнення";

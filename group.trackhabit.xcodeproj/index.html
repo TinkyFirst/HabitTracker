@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Habit - Build Better Habits Every Day</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .app-icon {
+            font-size: 120px;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        h1 {
+            font-size: 4em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-5px);
+        }
+        
+        .app-store-badge {
+            margin-top: 30px;
+        }
+        
+        .app-store-badge img {
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+        
+        .app-store-badge img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 60px;
+        }
+        
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            padding: 40px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        /* Screenshots Section */
+        .screenshots {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .screenshots-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+        
+        .screenshot-placeholder {
+            width: 250px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            border: 3px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .screenshot-placeholder:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 20px;
+            background: white;
+        }
+        
+        .pricing-cards {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        
+        .pricing-card {
+            padding: 50px 30px;
+            border-radius: 20px;
+            background: white;
+            border: 3px solid #e0e0e0;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-card.featured {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+            border: 3px solid #667eea;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .pricing-card h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-card .price {
+            font-size: 3em;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .pricing-card .period {
+            font-size: 1.1em;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .pricing-card li {
+            padding: 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .pricing-card li::before {
+            content: "✓ ";
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .pricing-card.featured li::before {
+            color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 60px 20px;
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #667eea;
+        }
+        
+        .social-links {
+            margin: 30px 0;
+            font-size: 2em;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .tagline {
+                font-size: 1.2em;
+            }
+            
+            .section-title {
+                font-size: 2em;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="app-icon">✅</div>
+            <h1>Track Habit</h1>
+            <p class="tagline">Build better habits, one day at a time</p>
+            <div class="cta-buttons">
+                <a href="#features" class="btn btn-primary">Learn More</a>
+                <a href="#pricing" class="btn btn-secondary">See Pricing</a>
+            </div>
+            <div class="app-store-badge">
+                <a href="https://apps.apple.com" target="_blank">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='60' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' rx='10' fill='%23000'/%3E%3Ctext x='100' y='35' text-anchor='middle' fill='white' font-family='Arial' font-size='14' font-weight='bold'%3EDownload on the App Store%3C/text%3E%3C/svg%3E" alt="Download on the App Store">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title fade-in">Why Track Habit?</h2>
+        <p class="section-subtitle fade-in">Everything you need to build lasting habits</p>
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">📊</div>
+                <h3>Beautiful Stats</h3>
+                <p>Visualize your progress with intuitive charts and insights. See your streaks, completion rates, and patterns at a glance.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🔔</div>
+                <h3>Smart Reminders</h3>
+                <p>Never forget a habit with customizable notifications. Set multiple reminders throughout the day.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">☁️</div>
+                <h3>iCloud Sync</h3>
+                <p>Seamlessly sync your habits across all your Apple devices. Your data is always up to date.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🎯</div>
+                <h3>Flexible Goals</h3>
+                <p>Set daily, weekly, or custom frequency goals. Track habits your way.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🎨</div>
+                <h3>Beautiful Design</h3>
+                <p>Enjoy a clean, modern interface that makes tracking habits a pleasure.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🔒</div>
+                <h3>Privacy First</h3>
+                <p>Your data stays yours. No tracking, no ads, no selling your information.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots">
+        <h2 class="section-title">See It In Action</h2>
+        <p class="section-subtitle">A glimpse of Track Habit</p>
+        <div class="screenshots-container">
+            <div class="screenshot-placeholder">📱</div>
+            <div class="screenshot-placeholder">📊</div>
+            <div class="screenshot-placeholder">✅</div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <h2 class="section-title fade-in">Simple Pricing</h2>
+        <p class="section-subtitle fade-in">Choose the plan that works for you</p>
+        <div class="pricing-cards">
+            <div class="pricing-card fade-in">
+                <h3>Free</h3>
+                <div class="price">$0</div>
+                <div class="period">Forever</div>
+                <ul>
+                    <li>Up to 3 habits</li>
+                    <li>Basic statistics</li>
+                    <li>Daily reminders</li>
+                    <li>iCloud sync</li>
+                </ul>
+                <a href="#" class="btn btn-secondary">Get Started</a>
+            </div>
+            <div class="pricing-card featured fade-in">
+                <h3>Pro</h3>
+                <div class="price">$2.99</div>
+                <div class="period">per month</div>
+                <ul>
+                    <li>Unlimited habits</li>
+                    <li>Advanced statistics</li>
+                    <li>Multiple reminders</li>
+                    <li>Custom themes</li>
+                    <li>Widget support</li>
+                    <li>Export data</li>
+                </ul>
+                <a href="#" class="btn btn-primary">Go Pro</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <h3>Track Habit</h3>
+        <p style="margin: 20px 0; opacity: 0.8;">Building better habits, together.</p>
+        
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-service.html">Terms of Service</a>
+            <a href="mailto:AndriyPopovich_temp@icloud.com">Contact Support</a>
+        </div>
+        
+        <div class="social-links">
+            <a href="#" title="Twitter">🐦</a>
+            <a href="#" title="Instagram">📷</a>
+            <a href="mailto:AndriyPopovich_temp@icloud.com" title="Email">✉️</a>
+        </div>
+        
+        <p style="margin-top: 30px; opacity: 0.7;">© 2025 Andriy Popovich. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

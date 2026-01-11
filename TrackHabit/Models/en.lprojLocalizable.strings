@@ -1,0 +1,207 @@
+/* 
+  Localizable.strings (English)
+  Achievements localization
+*/
+
+// MARK: - General
+"achievements.title" = "Achievements";
+"achievements.unlocked" = "Unlocked!";
+"achievements.of" = "of";
+"achievements.done" = "Done";
+"achievements.progress" = "Progress";
+"achievements.unlocked_on" = "Unlocked on";
+"achievements.category" = "Category";
+"achievements.rarity" = "Rarity";
+"achievements.requirement" = "Requirement";
+"achievement.unlocked" = "Achievement Unlocked";
+
+// MARK: - Categories
+"achievement.category.all" = "All";
+"achievement.category.streaks" = "Streaks";
+"achievement.category.completions" = "Completions";
+"achievement.category.habits" = "Habits";
+"achievement.category.consistency" = "Consistency";
+"achievement.category.milestones" = "Milestones";
+"achievement.category.special" = "Special";
+
+// MARK: - Rarity
+"achievements.common" = "Common";
+"achievements.rare" = "Rare";
+"achievements.legendary" = "Legendary";
+
+"achievements.rarity.common" = "Common";
+"achievements.rarity.uncommon" = "Uncommon";
+"achievements.rarity.rare" = "Rare";
+"achievements.rarity.epic" = "Epic";
+"achievements.rarity.legendary" = "Legendary";
+
+// MARK: - First Steps (5)
+"achievement.first_habit.title" = "First Habit";
+"achievement.first_habit.description" = "Create your first habit";
+
+"achievement.first_checkin.title" = "First Step";
+"achievement.first_checkin.description" = "Complete a habit for the first time";
+
+"achievement.three_habits.title" = "Three Habits";
+"achievement.three_habits.description" = "Create 3 habits";
+
+"achievement.five_habits.title" = "Five Habits";
+"achievement.five_habits.description" = "Create 5 habits";
+
+"achievement.ten_habits.title" = "Ten Habits";
+"achievement.ten_habits.description" = "Create 10 habits";
+
+// MARK: - Streaks (10)
+"achievement.streak_3.title" = "🔥 3 Day Streak";
+"achievement.streak_3.description" = "Maintain a 3-day streak";
+
+"achievement.streak_7.title" = "🔥 Week of Fire";
+"achievement.streak_7.description" = "Maintain a 7-day streak";
+
+"achievement.streak_14.title" = "🔥 Two Weeks";
+"achievement.streak_14.description" = "Maintain a 14-day streak";
+
+"achievement.streak_21.title" = "🔥 Three Weeks";
+"achievement.streak_21.description" = "Maintain a 21-day streak";
+
+"achievement.streak_30.title" = "🔥 Month of Power";
+"achievement.streak_30.description" = "Maintain a 30-day streak";
+
+"achievement.streak_50.title" = "🔥 Fifty Days";
+"achievement.streak_50.description" = "Maintain a 50-day streak";
+
+"achievement.streak_100.title" = "🔥 The Century";
+"achievement.streak_100.description" = "Maintain a 100-day streak";
+
+"achievement.streak_200.title" = "✨ Two Hundred";
+"achievement.streak_200.description" = "Maintain a 200-day streak";
+
+"achievement.streak_365.title" = "👑 Year of Excellence";
+"achievement.streak_365.description" = "Maintain a full year streak";
+
+"achievement.streak_500.title" = "👑 Five Hundred";
+"achievement.streak_500.description" = "Maintain a 500-day streak";
+
+// MARK: - Completions (10)
+"achievement.checkins_10.title" = "Ten Times";
+"achievement.checkins_10.description" = "Complete 10 check-ins";
+
+"achievement.checkins_25.title" = "Twenty Five";
+"achievement.checkins_25.description" = "Complete 25 check-ins";
+
+"achievement.checkins_50.title" = "Fifty";
+"achievement.checkins_50.description" = "Complete 50 check-ins";
+
+"achievement.checkins_100.title" = "Century of Completions";
+"achievement.checkins_100.description" = "Complete 100 check-ins";
+
+"achievement.checkins_250.title" = "Two Fifty";
+"achievement.checkins_250.description" = "Complete 250 check-ins";
+
+"achievement.checkins_500.title" = "Five Hundred";
+"achievement.checkins_500.description" = "Complete 500 check-ins";
+
+"achievement.checkins_1000.title" = "One Thousand";
+"achievement.checkins_1000.description" = "Complete 1000 check-ins";
+
+"achievement.checkins_2000.title" = "Two Thousand";
+"achievement.checkins_2000.description" = "Complete 2000 check-ins";
+
+"achievement.checkins_5000.title" = "Five Thousand";
+"achievement.checkins_5000.description" = "Complete 5000 check-ins";
+
+"achievement.checkins_10000.title" = "Ten Thousand";
+"achievement.checkins_10000.description" = "Complete 10000 check-ins";
+
+// MARK: - Consistency (10)
+"achievement.perfect_week.title" = "Perfect Week";
+"achievement.perfect_week.description" = "Complete all habits for 7 days straight";
+
+"achievement.perfect_month.title" = "Perfect Month";
+"achievement.perfect_month.description" = "Complete all habits for 30 days straight";
+
+"achievement.early_bird.title" = "Early Bird";
+"achievement.early_bird.description" = "7 check-ins before 8 AM";
+
+"achievement.night_owl.title" = "Night Owl";
+"achievement.night_owl.description" = "7 check-ins after 10 PM";
+
+"achievement.weekend_warrior.title" = "Weekend Warrior";
+"achievement.weekend_warrior.description" = "10 perfect weekends";
+
+"achievement.all_habits_day.title" = "All Habits Day";
+"achievement.all_habits_day.description" = "Complete all habits in one day";
+
+"achievement.comeback_kid.title" = "Comeback Kid";
+"achievement.comeback_kid.description" = "Rebuild a streak after losing it";
+
+"achievement.no_skip_month.title" = "No Skip Month";
+"achievement.no_skip_month.description" = "At least one check-in every day for a month";
+
+"achievement.goal_crusher.title" = "Goal Crusher";
+"achievement.goal_crusher.description" = "Reach 10 goals";
+
+"achievement.overachiever.title" = "Overachiever";
+"achievement.overachiever.description" = "Exceed goals by 150% - 50 times";
+
+// MARK: - Milestones (10)
+"achievement.one_week.title" = "First Week";
+"achievement.one_week.description" = "Use the app for 7 days";
+
+"achievement.one_month.title" = "First Month";
+"achievement.one_month.description" = "Use the app for 30 days";
+
+"achievement.three_months.title" = "Three Months";
+"achievement.three_months.description" = "Use the app for 90 days";
+
+"achievement.six_months.title" = "Six Months";
+"achievement.six_months.description" = "Use the app for 180 days";
+
+"achievement.one_year.title" = "One Year";
+"achievement.one_year.description" = "Use the app for a full year";
+
+"achievement.two_years.title" = "Two Years";
+"achievement.two_years.description" = "Use the app for 2 years";
+
+"achievement.habit_master.title" = "Habit Master";
+"achievement.habit_master.description" = "100-day streak on one habit";
+
+"achievement.dedication.title" = "Dedication";
+"achievement.dedication.description" = "Maintain 3+ habits for 90 days";
+
+"achievement.resilient.title" = "Resilient";
+"achievement.resilient.description" = "Rebuild a streak 5 times";
+
+"achievement.legendary_status.title" = "Legendary Status";
+"achievement.legendary_status.description" = "Unlock 40 other achievements";
+
+// MARK: - Special (10)
+"achievement.new_year_new_me.title" = "New Year New Me";
+"achievement.new_year_new_me.description" = "Create a habit on January 1st";
+
+"achievement.birthday_celebration.title" = "Birthday Celebration";
+"achievement.birthday_celebration.description" = "Complete a habit on your birthday";
+
+"achievement.leap_day.title" = "Leap Day";
+"achievement.leap_day.description" = "Complete a habit on February 29th";
+
+"achievement.midnight_warrior.title" = "Midnight Warrior";
+"achievement.midnight_warrior.description" = "Complete a habit at midnight";
+
+"achievement.multitasker.title" = "Multitasker";
+"achievement.multitasker.description" = "5+ habits in one day";
+
+"achievement.speed_demon.title" = "Speed Demon";
+"achievement.speed_demon.description" = "10 check-ins within 1 hour";
+
+"achievement.social_butterfly.title" = "Social Butterfly";
+"achievement.social_butterfly.description" = "Share an achievement";
+
+"achievement.collector.title" = "Collector";
+"achievement.collector.description" = "Unlock 25 achievements";
+
+"achievement.perfectionist.title" = "Perfectionist";
+"achievement.perfectionist.description" = "100% completion rate for 30 days";
+
+"achievement.unlock_all.title" = "Ultimate Victory";
+"achievement.unlock_all.description" = "Unlock all other achievements";
