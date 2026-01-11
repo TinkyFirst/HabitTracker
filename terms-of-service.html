@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Habit - Terms of Service</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --accent: #667eea;
+            --accent-dark: #764ba2;
+            --accent-light: #8b9df0;
+            --accent-glow: rgba(102, 126, 234, 0.15);
+            --success: #5cb270;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: rgba(102, 126, 234, 0.15);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .page-header {
+            background: var(--gradient);
+            padding: 120px 60px 80px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.95em;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: white;
+        }
+        
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.4em;
+            color: white;
+            text-decoration: none;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-style: normal;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+        
+        .last-updated {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95em;
+        }
+        
+        /* Main Content */
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px;
+            background: white;
+            margin-top: -40px;
+            border-radius: 24px 24px 0 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* TL;DR Box */
+        .tldr {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 50px;
+        }
+        
+        .tldr-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .tldr-header h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5em;
+            font-weight: 400;
+            color: var(--warning);
+            margin: 0;
+        }
+        
+        .tldr p {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        
+        .tldr p:first-of-type {
+            margin-top: 0;
+        }
+        
+        .tldr ul {
+            margin: 0;
+            padding-left: 25px;
+        }
+        
+        .tldr li {
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        
+        /* Section Styles */
+        h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.8em;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        h3 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+        }
+        
+        ul {
+            margin: 15px 0 25px;
+            padding-left: 25px;
+        }
+        
+        li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        
+        li strong {
+            color: var(--text-primary);
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-dark);
+        }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--accent-glow);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 16px 16px 0;
+            padding: 25px 30px;
+            margin: 25px 0;
+        }
+        
+        .highlight-box p {
+            margin-bottom: 12px;
+        }
+        
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .highlight-box ul {
+            margin-bottom: 0;
+        }
+        
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin: 25px 0;
+        }
+        
+        .warning-box h3 {
+            color: var(--danger);
+            margin-top: 0;
+        }
+        
+        .warning-box p {
+            color: var(--text-secondary);
+        }
+        
+        .warning-box strong {
+            color: var(--text-primary);
+        }
+        
+        /* Contact Box */
+        .contact-box {
+            background: linear-gradient(135deg, rgba(92, 178, 112, 0.1) 0%, rgba(92, 178, 112, 0.05) 100%);
+            border: 1px solid rgba(92, 178, 112, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .contact-box h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5em;
+            font-weight: 400;
+            color: var(--success);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .contact-box p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        
+        .contact-box a {
+            color: var(--success);
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .contact-box a:hover {
+            color: #4a9960;
+        }
+        
+        /* Footer */
+        .footer {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 60px 60px;
+            background: white;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 100px 30px 60px;
+            }
+            
+            .content {
+                padding: 40px 30px;
+                margin-top: -30px;
+            }
+            
+            .footer {
+                padding: 30px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .tldr {
+                padding: 25px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <div class="header-content">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            <div>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">✓</div>
+                    Track Habit
+                </a>
+            </div>
+            <h1>Terms of Service</h1>
+            <p class="last-updated">Last Updated: January 5, 2025</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="tldr">
+            <div class="tldr-header">
+                <span style="font-size: 1.5em;">📝</span>
+                <h3>Summary (TL;DR)</h3>
+            </div>
+            
+            <p>✅ Using the App:</p>
+            <ul>
+                <li>Personal use only</li>
+                <li>Follow our rules</li>
+                <li>Don't break the law</li>
+            </ul>
+            
+            <p>💰 Subscriptions:</p>
+            <ul>
+                <li>Managed by Apple</li>
+                <li>Auto-renews (can cancel anytime)</li>
+                <li>Refunds through Apple</li>
+            </ul>
+            
+            <p>📱 Features:</p>
+            <ul>
+                <li>Free: Basic tracking (up to 3 habits)</li>
+                <li>Pro: Unlimited habits + advanced features</li>
+            </ul>
+            
+            <p>🔒 Your Data:</p>
+            <ul>
+                <li>You own it</li>
+                <li>Can export/delete anytime</li>
+            </ul>
+        </div>
+
+        <h2>📄 1. Agreement to Terms</h2>
+        <p>By downloading, installing, or using Track Habit ("the App"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the App.</p>
+        
+        <div class="highlight-box">
+            <p><strong>These Terms constitute a legally binding agreement between you and Andriy Popovich ("we", "us", or "our").</strong></p>
+        </div>
+
+        <h2>📱 2. Description of Service</h2>
+        <p>Track Habit is a habit tracking application available for iOS devices. The App allows you to:</p>
+        <ul>
+            <li>Create and manage habits</li>
+            <li>Track your daily progress</li>
+            <li>View statistics and streaks</li>
+            <li>Sync data across devices (via iCloud)</li>
+            <li>Receive reminders and notifications</li>
+        </ul>
+
+        <h2>💳 3. Subscriptions and Payments</h2>
+
+        <h3>3.1 Subscription Plans</h3>
+        <p>Track Habit offers the following subscription options:</p>
+        <ul>
+            <li><strong>Monthly Pro Subscription</strong></li>
+            <li><strong>Yearly Pro Subscription</strong> (discounted)</li>
+            <li>Optional: <strong>Lifetime Purchase</strong> (one-time payment)</li>
+        </ul>
+
+        <h3>3.2 Payment Terms</h3>
+        <div class="highlight-box">
+            <ul>
+                <li>Payment is charged to your Apple ID account at confirmation of purchase</li>
+                <li>All payments are processed by Apple through the App Store</li>
+                <li>Prices are shown in your local currency</li>
+                <li>Prices may vary by country due to exchange rates and local taxes</li>
+            </ul>
+        </div>
+
+        <h3>3.3 Auto-Renewal</h3>
+        <div class="warning-box">
+            <h3>⚠️ Important</h3>
+            <ul>
+                <li>Subscriptions automatically renew unless auto-renew is turned off at least 24 hours before the end of the current period</li>
+                <li>Your account will be charged for renewal within 24 hours before the end of the current period</li>
+                <li>You can manage subscriptions and turn off auto-renewal in your Apple ID Account Settings</li>
+            </ul>
+        </div>
+
+        <h3>3.4 Free Trial</h3>
+        <p>If offered:</p>
+        <ul>
+            <li>New users may be eligible for a free trial period</li>
+            <li>You will be charged when the trial ends unless you cancel before the trial period ends</li>
+            <li>Any unused portion of a free trial is forfeited when purchasing a subscription</li>
+        </ul>
+
+        <h3>3.5 Cancellation</h3>
+        <ul>
+            <li>You can cancel your subscription at any time</li>
+            <li>Cancellation takes effect at the end of the current billing period</li>
+            <li>No refunds for partial months or years</li>
+            <li>You will retain Pro features until the end of the paid period</li>
+        </ul>
+
+        <h3>3.6 Refunds</h3>
+        <ul>
+            <li>Refund requests must be made through Apple: <a href="https://reportaproblem.apple.com/" target="_blank">reportaproblem.apple.com</a></li>
+            <li>We cannot process refunds directly</li>
+            <li>Apple's refund policy applies</li>
+        </ul>
+
+        <h2>✨ 4. Features and Availability</h2>
+
+        <h3>4.1 Free Features</h3>
+        <p>The free version includes:</p>
+        <ul>
+            <li>✅ Basic habit tracking (up to 3 habits)</li>
+            <li>✅ Daily check-ins</li>
+            <li>✅ Basic statistics</li>
+            <li>✅ Reminders</li>
+            <li>✅ iCloud sync</li>
+            <li>✅ Dark mode</li>
+        </ul>
+
+        <h3>4.2 Pro Features</h3>
+        <p>Pro subscription unlocks:</p>
+        <ul>
+            <li>✅ Unlimited habits</li>
+            <li>✅ Advanced analytics</li>
+            <li>✅ Custom themes</li>
+            <li>✅ Enhanced widgets</li>
+            <li>✅ Priority support</li>
+            <li>✅ Future premium features</li>
+        </ul>
+
+        <h2>👤 5. User Account and Data</h2>
+
+        <h3>5.1 Your Responsibility</h3>
+        <p>You are responsible for:</p>
+        <ul>
+            <li>Maintaining the security of your Apple ID</li>
+            <li>All activities that occur under your account</li>
+            <li>The accuracy of information you provide</li>
+            <li>Backing up your data (though iCloud sync helps with this)</li>
+        </ul>
+
+        <h3>5.2 Your Data</h3>
+        <div class="highlight-box">
+            <ul>
+                <li>You own all habit data you create in the App</li>
+                <li>Your data is stored on your device and optionally in your iCloud</li>
+                <li>We do not claim ownership of your data</li>
+                <li>You can export or delete your data at any time</li>
+            </ul>
+        </div>
+
+        <h2>🛡️ 6. Acceptable Use</h2>
+
+        <h3>You Agree To:</h3>
+        <ul>
+            <li>✅ Use the App legally and appropriately</li>
+            <li>✅ Respect intellectual property rights</li>
+            <li>✅ Provide accurate information</li>
+            <li>✅ Keep your device and account secure</li>
+        </ul>
+
+        <h3>You Agree NOT To:</h3>
+        <ul>
+            <li>❌ Use the App for illegal activities</li>
+            <li>❌ Violate any laws or regulations</li>
+            <li>❌ Interfere with the App's functionality</li>
+            <li>❌ Attempt to bypass Pro subscription restrictions</li>
+            <li>❌ Share subscription access with others</li>
+        </ul>
+
+        <h2>©️ 7. Intellectual Property</h2>
+
+        <h3>7.1 Our Rights</h3>
+        <p>Track Habit, including all code, design, graphics, and content, is owned by Andriy Popovich. All rights reserved unless explicitly granted.</p>
+
+        <h3>7.2 Your Rights</h3>
+        <p>You retain ownership of all habit data you create. We claim no ownership over your personal information.</p>
+
+        <h2>🔒 8. Privacy</h2>
+        <p>Your privacy is important to us. Our Privacy Policy explains how we collect, use, and protect your data.</p>
+        <p><strong>Privacy Policy:</strong> <a href="privacy-policy.html">View Privacy Policy</a></p>
+
+        <h2>☁️ 9. iCloud Integration</h2>
+
+        <h3>9.1 Optional Feature</h3>
+        <ul>
+            <li>iCloud sync is optional</li>
+            <li>Requires an active iCloud account</li>
+            <li>Subject to Apple's iCloud Terms of Service</li>
+        </ul>
+
+        <h3>9.2 Data Storage</h3>
+        <ul>
+            <li>Data stored in your personal iCloud account</li>
+            <li>We do not have access to your iCloud data</li>
+            <li>You control iCloud sync from iOS Settings</li>
+        </ul>
+
+        <h2>⚠️ 10. Disclaimers and Limitations</h2>
+
+        <div class="warning-box">
+            <h3>10.1 "AS IS" Basis</h3>
+            <p><strong>THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED.</strong></p>
+
+            <h3>10.2 Limitation of Liability</h3>
+            <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE SHALL NOT BE LIABLE FOR:</strong></p>
+            <ul>
+                <li>Any indirect, incidental, special, or consequential damages</li>
+                <li>Loss of data, profits, or revenue</li>
+                <li>Device damage</li>
+                <li>Interruption of service</li>
+            </ul>
+
+            <h3>10.3 Health Disclaimer</h3>
+            <p><strong>Track Habit is NOT:</strong></p>
+            <ul>
+                <li>❌ A medical device</li>
+                <li>❌ Medical advice or treatment</li>
+                <li>❌ A substitute for professional health advice</li>
+            </ul>
+            <p>Consult healthcare professionals for medical concerns.</p>
+        </div>
+
+        <h2>🔚 11. Termination</h2>
+
+        <h3>11.1 By You</h3>
+        <ul>
+            <li>You can stop using the App at any time</li>
+            <li>Delete the App from your device</li>
+            <li>Cancel subscriptions through your Apple ID settings</li>
+        </ul>
+
+        <h3>11.2 By Us</h3>
+        <p>We may suspend or terminate your access if you violate these Terms or engage in fraudulent activity.</p>
+
+        <h2>🍎 12. Apple-Specific Terms</h2>
+
+        <p>You acknowledge that:</p>
+        <ul>
+            <li>These Terms are between you and Andriy Popovich, not Apple</li>
+            <li>Apple has no obligation to provide maintenance or support</li>
+            <li>Apple is not responsible for the App or its content</li>
+            <li>Apple is not liable for any claims related to the App</li>
+        </ul>
+
+        <p>Your use is also subject to Apple's <a href="https://www.apple.com/legal/internet-services/itunes/" target="_blank">Terms of Service</a>.</p>
+
+        <h2>📝 13. Changes to Terms</h2>
+        <p>We may update these Terms at any time. Changes will be effective when posted. Your continued use after changes constitutes acceptance of the updated Terms.</p>
+
+        <h2>⚖️ 14. Dispute Resolution</h2>
+
+        <h3>14.1 Informal Resolution</h3>
+        <p>If you have a dispute, please contact us first at <a href="mailto:AndriyPopovich_temp@icloud.com">AndriyPopovich_temp@icloud.com</a>. We will try to resolve disputes informally within 30 days.</p>
+
+        <div class="contact-box">
+            <h3>📧 Contact Us</h3>
+            <p>For questions, support, or concerns about these Terms:</p>
+            <p><a href="mailto:AndriyPopovich_temp@icloud.com">AndriyPopovich_temp@icloud.com</a></p>
+            <p style="margin-top: 15px; font-size: 0.9em;">We aim to respond within 48 hours.</p>
+        </div>
+
+        <h2>✅ 15. Acknowledgment</h2>
+        <div class="warning-box">
+            <p><strong>BY USING TRACK HABIT, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THESE TERMS OF SERVICE.</strong></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Track Habit</strong></p>
+        <p>© 2025 Andriy Popovich. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+    </footer>
+</body>
+</html>
