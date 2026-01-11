@@ -1,0 +1,203 @@
+/* 🇬🇧 English Localization - Achievements */
+/* Fun & Engaging translations! */
+
+// MARK: - Categories
+"achievement.category.streaks" = "Streaks";
+"achievement.category.completions" = "Completions";
+"achievement.category.habits" = "Habits";
+"achievement.category.consistency" = "Consistency";
+"achievement.category.milestones" = "Milestones";
+"achievement.category.special" = "Special";
+"achievement.category.all" = "All";
+
+// MARK: - General
+"achievement.unlocked" = "ACHIEVEMENT UNLOCKED!";
+"achievements.title" = "Achievements";
+"achievements.of" = "of";
+"achievements.common" = "Common";
+"achievements.rare" = "Rare";
+"achievements.legendary" = "Legendary";
+"achievements.unlocked_on" = "Unlocked on";
+"achievements.progress" = "Progress";
+"achievements.category" = "Category";
+"achievements.rarity" = "Rarity";
+"achievements.requirement" = "Requirement";
+"achievements.done" = "Done";
+
+// MARK: - Rarity
+"achievements.rarity.common" = "Common";
+"achievements.rarity.uncommon" = "Uncommon";
+"achievements.rarity.rare" = "Rare";
+"achievements.rarity.epic" = "Epic";
+"achievements.rarity.legendary" = "Legendary";
+
+// MARK: - First Steps (5) 🌱
+"achievement.first_habit.title" = "Baby Steps";
+"achievement.first_habit.description" = "Created your first habit! Every journey starts with a single step! 🥞";
+
+"achievement.first_checkin.title" = "Getting Started!";
+"achievement.first_checkin.description" = "First check-in complete! You're officially on the path! ✨";
+
+"achievement.three_habits.title" = "Three's Company";
+"achievement.three_habits.description" = "Three habits strong! Like a three-legged stool — stable and reliable! 🪑";
+
+"achievement.five_habits.title" = "High Five!";
+"achievement.five_habits.description" = "5 habits! You're juggling them like a pro! ✋";
+
+"achievement.ten_habits.title" = "Perfect Ten";
+"achievement.ten_habits.description" = "10 habits! You're a habit-forming machine! 🎯";
+
+// MARK: - Streaks (10) 🔥
+"achievement.streak_3.title" = "On Fire!";
+"achievement.streak_3.description" = "3 days in a row! The flame is lit 🔥";
+
+"achievement.streak_7.title" = "Week Warrior!";
+"achievement.streak_7.description" = "7 days strong! A full week of excellence! 💪";
+
+"achievement.streak_14.title" = "Two-Week Wonder";
+"achievement.streak_14.description" = "14 days! Two weeks of pure dedication! ☀️";
+
+"achievement.streak_21.title" = "Habit Formed";
+"achievement.streak_21.description" = "21 days! They say this is when habits stick. You did it! 📜";
+
+"achievement.streak_30.title" = "Monthly Master";
+"achievement.streak_30.description" = "A whole month! Consistency is your middle name! 💰";
+
+"achievement.streak_50.title" = "Half Century!";
+"achievement.streak_50.description" = "50 days! That's a golden anniversary of habits! 🎊";
+
+"achievement.streak_100.title" = "Century Mark!";
+"achievement.streak_100.description" = "100 days straight! You're unstoppable! 💯";
+
+"achievement.streak_200.title" = "Double Century";
+"achievement.streak_200.description" = "200 days! This isn't just a streak, it's a lifestyle! 🚀";
+
+"achievement.streak_365.title" = "Year-Long Legend!";
+"achievement.streak_365.description" = "365 days without missing! You're a calendar year champion! 🎆";
+
+"achievement.streak_500.title" = "Half Millennium";
+"achievement.streak_500.description" = "500 days! You're now a legend in the making! 👑";
+
+// MARK: - Completions (10) ✅
+"achievement.checkins_10.title" = "Perfect Ten";
+"achievement.checkins_10.description" = "10 check-ins! Like getting your first gold star! ✏️";
+
+"achievement.checkins_25.title" = "Quarter Century";
+"achievement.checkins_25.description" = "25 times! The coins are adding up! 🪙";
+
+"achievement.checkins_50.title" = "Half Hundred";
+"achievement.checkins_50.description" = "50 check-ins! Time to celebrate! 🎉";
+
+"achievement.checkins_100.title" = "Century Club!";
+"achievement.checkins_100.description" = "100 completions! This is professional level! 💼";
+
+"achievement.checkins_250.title" = "Quarter Thousand";
+"achievement.checkins_250.description" = "250 times! That's dedication! 🎬";
+
+"achievement.checkins_500.title" = "Five Hundred!";
+"achievement.checkins_500.description" = "500 check-ins! You're counting victories! 💵";
+
+"achievement.checkins_1000.title" = "One Thousand!";
+"achievement.checkins_1000.description" = "1000 completions! Like \"One Thousand and One Nights\"! 🌙✨";
+
+"achievement.checkins_2000.title" = "Two Thousand!";
+"achievement.checkins_2000.description" = "2000 times! That sounds epic! 🗓️";
+
+"achievement.checkins_5000.title" = "Five Thousand!";
+"achievement.checkins_5000.description" = "5000 check-ins! You're a superstar! 🎤⭐";
+
+"achievement.checkins_10000.title" = "Ten Thousand!";
+"achievement.checkins_10000.description" = "10,000 times! You're a master! ⚔️";
+
+// MARK: - Consistency (10) 📅
+"achievement.perfect_week.title" = "Perfect Week";
+"achievement.perfect_week.description" = "All habits for 7 days! Like a perfect Sunday roast! 🥓";
+
+"achievement.perfect_month.title" = "Flawless Month";
+"achievement.perfect_month.description" = "30 days without missing! Payday never felt so good! 💰";
+
+"achievement.early_bird.title" = "Early Bird";
+"achievement.early_bird.description" = "7 check-ins before 8 AM! The early bird gets the worm! 🌅🐦";
+
+"achievement.night_owl.title" = "Night Owl";
+"achievement.night_owl.description" = "7 check-ins after 10 PM! Burning the midnight oil! 🌙🦉";
+
+"achievement.weekend_warrior.title" = "Weekend Warrior";
+"achievement.weekend_warrior.description" = "10 perfect weekends! You don't take days off! 🏕️";
+
+"achievement.all_habits_day.title" = "Victory Day";
+"achievement.all_habits_day.description" = "All habits in one day! Like hosting a perfect party! 🎄";
+
+"achievement.comeback_kid.title" = "Comeback Kid!";
+"achievement.comeback_kid.description" = "Rebuilt your streak after a break! Stronger than ever! ⚽💪";
+
+"achievement.no_skip_month.title" = "No Days Off";
+"achievement.no_skip_month.description" = "30 days every single day! You're a machine! 🚜";
+
+"achievement.goal_crusher.title" = "Goal Crusher";
+"achievement.goal_crusher.description" = "10 goals achieved! Following the recipe to success! 🥣";
+
+"achievement.overachiever.title" = "Overachiever";
+"achievement.overachiever.description" = "Exceeded goals 50 times! You're an A+ student! 📚🅰️";
+
+// MARK: - Milestones (10) 🏆
+"achievement.one_week.title" = "First Week";
+"achievement.one_week.description" = "7 days with the app! Welcome aboard! 📅";
+
+"achievement.one_month.title" = "One Month Strong";
+"achievement.one_month.description" = "30 days! You passed the trial period! ✅";
+
+"achievement.three_months.title" = "Quarterly Champion";
+"achievement.three_months.description" = "3 months! That's a whole season! 🍂";
+
+"achievement.six_months.title" = "Half Year Hero!";
+"achievement.six_months.description" = "Half a year together! Halfway to greatness! 🎄";
+
+"achievement.one_year.title" = "Year Anniversary!";
+"achievement.one_year.description" = "A whole year! Time to celebrate big! 💒🎊";
+
+"achievement.two_years.title" = "Two Years!";
+"achievement.two_years.description" = "Two years! You're a toddler in habit years! 👶💬";
+
+"achievement.habit_master.title" = "Habit Master";
+"achievement.habit_master.description" = "100 days in a row! You're a craftsman! 🏺";
+
+"achievement.dedication.title" = "True Dedication";
+"achievement.dedication.description" = "3+ habits for 90 days! That's commitment! 🎖️";
+
+"achievement.resilient.title" = "Unbreakable";
+"achievement.resilient.description" = "Rebuilt streaks 5 times! You never give up! ⚔️🛡️";
+
+"achievement.legendary_status.title" = "Legendary Status";
+"achievement.legendary_status.description" = "40 achievements! You're a legend! 👑📖";
+
+// MARK: - Special (10) ✨
+"achievement.new_year_new_me.title" = "New Year, New Me!";
+"achievement.new_year_new_me.description" = "Started on January 1st! Resolution champion! 🎆🥂";
+
+"achievement.birthday_celebration.title" = "Birthday Wish";
+"achievement.birthday_celebration.description" = "Completed on your birthday! Best present ever! 🎂🕯️";
+
+"achievement.leap_day.title" = "Leap Day Legend";
+"achievement.leap_day.description" = "Completed on Feb 29! Rarer than a unicorn! 🦄";
+
+"achievement.midnight_warrior.title" = "Midnight Warrior";
+"achievement.midnight_warrior.description" = "Completed at 00:00! Like Cinderella but better! 🕐👸";
+
+"achievement.multitasker.title" = "Multitasker";
+"achievement.multitasker.description" = "5+ habits in one day! You're juggling like a pro! 👩‍🍳";
+
+"achievement.speed_demon.title" = "Speed Demon";
+"achievement.speed_demon.description" = "10 check-ins in an hour! Faster than lightning! 🚐💨";
+
+"achievement.social_butterfly.title" = "Social Butterfly";
+"achievement.social_butterfly.description" = "Shared an achievement! Spreading the word! 🦋🗣️";
+
+"achievement.collector.title" = "Collector";
+"achievement.collector.description" = "25 achievements! Building a beautiful collection! 📬🎖️";
+
+"achievement.perfectionist.title" = "Perfectionist";
+"achievement.perfectionist.description" = "30 days at 100%! Everything in its place! ✨🧹";
+
+"achievement.unlock_all.title" = "Collection Complete!";
+"achievement.unlock_all.description" = "All 49 achievements! You're the champion! 🏆🥇";
