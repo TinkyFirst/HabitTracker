@@ -73,6 +73,24 @@ struct SettingsView: View {
                             }
                     }
 
+                    // Achievements
+                    Section {
+                        NavigationLink {
+                            AchievementsView(modelContext: modelContext)
+                        } label: {
+                            HStack {
+                                Image(systemName: "trophy.fill")
+                                    .foregroundColor(.orange)
+                                Text("achievements.title".localized)
+                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+
+                                Spacer()
+
+                                AchievementBadge(modelContext: modelContext)
+                            }
+                        }
+                    }
+
                     // iCloud
                     Section("settings.data".localized) {
                         NavigationLink {

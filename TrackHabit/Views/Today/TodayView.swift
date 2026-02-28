@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftUI
 import SwiftData
 import WidgetKit
 
@@ -7,6 +6,7 @@ struct TodayView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(filter: #Predicate<Habit> { !$0.isArchived }, sort: \Habit.sortOrder)
     private var habits: [Habit]
+    @Query private var allCheckIns: [CheckIn]
 
     @State private var showingAddHabit = false
     @State private var showingGoalsSheet = false
@@ -14,6 +14,9 @@ struct TodayView: View {
     @State private var completedHabitEmoji = ""
     @State private var newlyCreatedHabitId: UUID? = nil
     @State private var shouldShowEditForNewHabit = false // Новий state для контролю
+    @State private var achievementManager: AchievementManager?
+    @State private var showingAchievementUnlock = false
+    @State private var unlockedAchievementDef: AchievementDefinition?
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject private var languageManager = LanguageManager.shared
     @Binding var selectedHabitId: UUID?
@@ -91,6 +94,12 @@ struct TodayView: View {
             }
             .onAppear {
                 setupNotifications()
+                checkAchievements()
+            }
+            .overlay {
+                if showingAchievementUnlock, let def = unlockedAchievementDef {
+                    AchievementUnlockView(definition: def, isShowing: $showingAchievementUnlock)
+                }
             }
             .onChange(of: newlyCreatedHabitId) { _, newId in
                 if let habitId = newId {
@@ -424,9 +433,25 @@ struct TodayView: View {
         }
 
         try? modelContext.save()
-        
+
+        // Check achievements
+        checkAchievements()
+
         // Update widgets
         WidgetRefreshManager.reloadHabitWidgets()
+    }
+
+    private func checkAchievements() {
+        if achievementManager == nil {
+            achievementManager = AchievementManager(modelContext: modelContext)
+        }
+        guard let manager = achievementManager else { return }
+        manager.checkAllAchievements(habits: habits, checkIns: allCheckIns)
+
+        if manager.showingUnlockAnimation, let def = manager.recentlyUnlockedAchievement {
+            unlockedAchievementDef = def
+            showingAchievementUnlock = true
+        }
     }
 
     private func createHabitFromTemplate(_ template: HabitTemplate) {
@@ -884,6 +909,6 @@ fileprivate struct TodayGoalCard: View {
 
 #Preview {
     TodayView(selectedHabitId: .constant(nil))
-        .modelContainer(for: [Habit.self, CheckIn.self], inMemory: true)
+        .modelContainer(for: [Habit.self, CheckIn.self, Achievement.self], inMemory: true)
 }
 

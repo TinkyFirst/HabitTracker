@@ -58,5 +58,5 @@ struct MainTabView: View {
 
 #Preview {
     MainTabView(selectedHabitId: .constant(nil))
-        .modelContainer(for: [Habit.self, CheckIn.self], inMemory: true)
+        .modelContainer(for: [Habit.self, CheckIn.self, Achievement.self], inMemory: true)
 }

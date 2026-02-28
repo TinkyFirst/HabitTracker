@@ -10,21 +10,27 @@ class SharedModelContainer {
     private init() {
         let schema = Schema([
             Habit.self,
-            CheckIn.self
+            CheckIn.self,
+            Achievement.self
         ])
         
-        // Use App Group for sharing data with widgets
-        // Make sure this matches your App Group ID in Signing & Capabilities
-        let modelConfiguration = ModelConfiguration(
-            schema: schema,
-            isStoredInMemoryOnly: false,
-            groupContainer: .identifier("group.trackhabit")
-        )
-        
         do {
-            container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            // Simplest possible configuration
+            container = try ModelContainer(for: schema)
+            print("✅ ModelContainer created successfully")
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            print("❌ Failed to create ModelContainer")
+            print("Error: \(error)")
+            print("Error localized: \(error.localizedDescription)")
+            
+            // Try in-memory as last resort
+            do {
+                let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+                container = try ModelContainer(for: schema, configurations: [config])
+                print("⚠️ Using in-memory storage (data will not persist)")
+            } catch {
+                fatalError("Could not create ModelContainer even with in-memory storage: \(error)")
+            }
         }
     }
 }
