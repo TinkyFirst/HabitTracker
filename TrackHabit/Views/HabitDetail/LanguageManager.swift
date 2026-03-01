@@ -53,6 +53,10 @@ class LanguageManager: ObservableObject {
 struct LocalizedStrings {
     static func get(_ key: String) -> String {
         let language = LanguageManager.shared.selectedLanguage
+
+        if let achievementValue = AchievementLocalizedStrings.value(for: key, language: language) {
+            return achievementValue
+        }
         
         if language == "uk" {
             return ukrainianStrings[key] ?? englishStrings[key] ?? key

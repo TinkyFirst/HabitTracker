@@ -3,16 +3,16 @@ import SwiftData
 
 @Model
 final class Achievement {
-    var id: String // Unique identifier (e.g., "first_checkin", "streak_7")
+    var id: String = "" // Unique identifier (e.g., "first_checkin", "streak_7")
     var unlockedAt: Date?
-    var progress: Int // Current progress towards achievement
-    var notified: Bool // Whether user was notified about unlock
+    var progress: Int = 0 // Current progress towards achievement
+    var notified: Bool = false // Whether user was notified about unlock
     
-    init(id: String, progress: Int = 0) {
+    init(id: String, progress: Int = 0, unlockedAt: Date? = nil, notified: Bool = false) {
         self.id = id
         self.progress = progress
-        self.unlockedAt = nil
-        self.notified = false
+        self.unlockedAt = unlockedAt
+        self.notified = notified
     }
 }
 
@@ -474,7 +474,7 @@ extension AchievementDefinition {
             icon: "graduationcap.fill",
             color: "9C27B0",
             category: .milestones,
-            requirement: 1,
+            requirement: 100,
             rarity: .epic
         ),
         AchievementDefinition(
@@ -484,7 +484,7 @@ extension AchievementDefinition {
             icon: "heart.fill",
             color: "E91E63",
             category: .milestones,
-            requirement: 1,
+            requirement: 90,
             rarity: .rare
         ),
         AchievementDefinition(
@@ -494,7 +494,7 @@ extension AchievementDefinition {
             icon: "shield.fill",
             color: "607D8B",
             category: .milestones,
-            requirement: 1,
+            requirement: 5,
             rarity: .epic
         ),
         AchievementDefinition(
@@ -504,7 +504,7 @@ extension AchievementDefinition {
             icon: "crown.fill",
             color: "FFD700",
             category: .milestones,
-            requirement: 1,
+            requirement: 40,
             rarity: .legendary
         ),
         
@@ -576,7 +576,7 @@ extension AchievementDefinition {
             icon: "person.2.fill",
             color: "E91E63",
             category: .special,
-            requirement: 1,
+            requirement: 7,
             rarity: .uncommon
         ),
         AchievementDefinition(

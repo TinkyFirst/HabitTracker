@@ -8,6 +8,8 @@ class AchievementManager: ObservableObject {
     @Published var unlockedAchievements: [Achievement] = []
     @Published var showingUnlockAnimation: Bool = false
     @Published var recentlyUnlockedAchievement: AchievementDefinition?
+
+    private var pendingUnlockQueue: [AchievementDefinition] = []
     
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
@@ -19,7 +21,42 @@ class AchievementManager: ObservableObject {
     private func loadAchievements() {
         let descriptor = FetchDescriptor<Achievement>()
         do {
-            unlockedAchievements = try modelContext.fetch(descriptor)
+            let fetched = try modelContext.fetch(descriptor)
+            var achievementsById: [String: Achievement] = [:]
+            var removedDuplicates = false
+
+            for achievement in fetched {
+                guard !achievement.id.isEmpty else {
+                    modelContext.delete(achievement)
+                    removedDuplicates = true
+                    continue
+                }
+
+                if let existing = achievementsById[achievement.id] {
+                    existing.progress = max(existing.progress, achievement.progress)
+                    existing.notified = existing.notified || achievement.notified
+
+                    switch (existing.unlockedAt, achievement.unlockedAt) {
+                    case (.none, .some(let date)):
+                        existing.unlockedAt = date
+                    case (.some(let current), .some(let incoming)) where incoming < current:
+                        existing.unlockedAt = incoming
+                    default:
+                        break
+                    }
+
+                    modelContext.delete(achievement)
+                    removedDuplicates = true
+                } else {
+                    achievementsById[achievement.id] = achievement
+                }
+            }
+
+            if removedDuplicates {
+                try? modelContext.save()
+            }
+
+            unlockedAchievements = achievementsById.values.sorted { $0.id < $1.id }
         } catch {
             print("Failed to load achievements: \(error)")
         }
@@ -28,6 +65,10 @@ class AchievementManager: ObservableObject {
     // MARK: - Get or Create Achievement
     
     private func getOrCreateAchievement(id: String) -> Achievement {
+        if let existing = unlockedAchievements.first(where: { $0.id == id }) {
+            return existing
+        }
+
         let predicate = #Predicate<Achievement> { achievement in
             achievement.id == id
         }
@@ -46,12 +87,15 @@ class AchievementManager: ObservableObject {
         // Create new achievement
         let newAchievement = Achievement(id: id)
         modelContext.insert(newAchievement)
+        unlockedAchievements.append(newAchievement)
         return newAchievement
     }
     
     // MARK: - Check All Achievements
     
     func checkAllAchievements(habits: [Habit], checkIns: [CheckIn]) {
+        loadAchievements()
+
         // First Steps
         checkFirstHabit(habits: habits)
         checkFirstCheckIn(checkIns: checkIns)
@@ -80,18 +124,25 @@ class AchievementManager: ObservableObject {
     // MARK: - First Steps
     
     private func checkFirstHabit(habits: [Habit]) {
+        updateProgress(id: "first_habit", progress: habits.count)
         guard !habits.isEmpty else { return }
         unlockAchievement(id: "first_habit", progress: habits.count)
     }
-    
+
     private func checkFirstCheckIn(checkIns: [CheckIn]) {
+        updateProgress(id: "first_checkin", progress: checkIns.count)
         guard !checkIns.isEmpty else { return }
         unlockAchievement(id: "first_checkin", progress: checkIns.count)
     }
     
     private func checkMultipleHabits(habits: [Habit]) {
         let count = habits.count
-        
+
+        // Always update progress so users can see how close they are
+        updateProgress(id: "three_habits", progress: count)
+        updateProgress(id: "five_habits", progress: count)
+        updateProgress(id: "ten_habits", progress: count)
+
         if count >= 3 {
             unlockAchievement(id: "three_habits", progress: count)
         }
@@ -109,141 +160,117 @@ class AchievementManager: ObservableObject {
         let maxStreak = habits.map { $0.currentStreak }.max() ?? 0
         let bestStreak = habits.map { $0.bestStreak }.max() ?? 0
         let streak = max(maxStreak, bestStreak)
-        
-        if streak >= 3 {
-            unlockAchievement(id: "streak_3", progress: streak)
+
+        // Always update progress for all streak achievements
+        let streakIds = ["streak_3", "streak_7", "streak_14", "streak_21", "streak_30",
+                         "streak_50", "streak_100", "streak_200", "streak_365", "streak_500"]
+        for id in streakIds {
+            updateProgress(id: id, progress: streak)
         }
-        if streak >= 7 {
-            unlockAchievement(id: "streak_7", progress: streak)
-        }
-        if streak >= 14 {
-            unlockAchievement(id: "streak_14", progress: streak)
-        }
-        if streak >= 21 {
-            unlockAchievement(id: "streak_21", progress: streak)
-        }
-        if streak >= 30 {
-            unlockAchievement(id: "streak_30", progress: streak)
-        }
-        if streak >= 50 {
-            unlockAchievement(id: "streak_50", progress: streak)
-        }
-        if streak >= 100 {
-            unlockAchievement(id: "streak_100", progress: streak)
-        }
-        if streak >= 200 {
-            unlockAchievement(id: "streak_200", progress: streak)
-        }
-        if streak >= 365 {
-            unlockAchievement(id: "streak_365", progress: streak)
-        }
-        if streak >= 500 {
-            unlockAchievement(id: "streak_500", progress: streak)
-        }
+
+        if streak >= 3 { unlockAchievement(id: "streak_3", progress: streak) }
+        if streak >= 7 { unlockAchievement(id: "streak_7", progress: streak) }
+        if streak >= 14 { unlockAchievement(id: "streak_14", progress: streak) }
+        if streak >= 21 { unlockAchievement(id: "streak_21", progress: streak) }
+        if streak >= 30 { unlockAchievement(id: "streak_30", progress: streak) }
+        if streak >= 50 { unlockAchievement(id: "streak_50", progress: streak) }
+        if streak >= 100 { unlockAchievement(id: "streak_100", progress: streak) }
+        if streak >= 200 { unlockAchievement(id: "streak_200", progress: streak) }
+        if streak >= 365 { unlockAchievement(id: "streak_365", progress: streak) }
+        if streak >= 500 { unlockAchievement(id: "streak_500", progress: streak) }
     }
     
     // MARK: - Completions
     
     private func checkCompletionAchievements(checkIns: [CheckIn]) {
         let count = checkIns.count
-        
-        if count >= 10 {
-            unlockAchievement(id: "checkins_10", progress: count)
+
+        // Always update progress for all completion achievements
+        let completionIds = ["checkins_10", "checkins_25", "checkins_50", "checkins_100", "checkins_250",
+                             "checkins_500", "checkins_1000", "checkins_2000", "checkins_5000", "checkins_10000"]
+        for id in completionIds {
+            updateProgress(id: id, progress: count)
         }
-        if count >= 25 {
-            unlockAchievement(id: "checkins_25", progress: count)
-        }
-        if count >= 50 {
-            unlockAchievement(id: "checkins_50", progress: count)
-        }
-        if count >= 100 {
-            unlockAchievement(id: "checkins_100", progress: count)
-        }
-        if count >= 250 {
-            unlockAchievement(id: "checkins_250", progress: count)
-        }
-        if count >= 500 {
-            unlockAchievement(id: "checkins_500", progress: count)
-        }
-        if count >= 1000 {
-            unlockAchievement(id: "checkins_1000", progress: count)
-        }
-        if count >= 2000 {
-            unlockAchievement(id: "checkins_2000", progress: count)
-        }
-        if count >= 5000 {
-            unlockAchievement(id: "checkins_5000", progress: count)
-        }
-        if count >= 10000 {
-            unlockAchievement(id: "checkins_10000", progress: count)
-        }
+
+        if count >= 10 { unlockAchievement(id: "checkins_10", progress: count) }
+        if count >= 25 { unlockAchievement(id: "checkins_25", progress: count) }
+        if count >= 50 { unlockAchievement(id: "checkins_50", progress: count) }
+        if count >= 100 { unlockAchievement(id: "checkins_100", progress: count) }
+        if count >= 250 { unlockAchievement(id: "checkins_250", progress: count) }
+        if count >= 500 { unlockAchievement(id: "checkins_500", progress: count) }
+        if count >= 1000 { unlockAchievement(id: "checkins_1000", progress: count) }
+        if count >= 2000 { unlockAchievement(id: "checkins_2000", progress: count) }
+        if count >= 5000 { unlockAchievement(id: "checkins_5000", progress: count) }
+        if count >= 10000 { unlockAchievement(id: "checkins_10000", progress: count) }
     }
     
     // MARK: - Consistency
     
     private func checkConsistencyAchievements(habits: [Habit], checkIns: [CheckIn]) {
         let calendar = Calendar.current
-        let today = Date()
-        
+
         // Perfect Week - all habits completed for 7 days straight
         if checkPerfectWeek(habits: habits) {
             unlockAchievement(id: "perfect_week", progress: 1)
         }
-        
+
         // Perfect Month - all habits completed for 30 days straight
         if checkPerfectMonth(habits: habits) {
             unlockAchievement(id: "perfect_month", progress: 1)
         }
-        
+
         // Early Bird - 7 check-ins before 8 AM
         let earlyCheckIns = checkIns.filter { checkIn in
             let hour = calendar.component(.hour, from: checkIn.timestamp)
             return hour < 8
         }.count
-        
+        updateProgress(id: "early_bird", progress: earlyCheckIns)
         if earlyCheckIns >= 7 {
             unlockAchievement(id: "early_bird", progress: earlyCheckIns)
         }
-        
+
         // Night Owl - 7 check-ins after 10 PM
         let lateCheckIns = checkIns.filter { checkIn in
             let hour = calendar.component(.hour, from: checkIn.timestamp)
             return hour >= 22
         }.count
-        
+        updateProgress(id: "night_owl", progress: lateCheckIns)
         if lateCheckIns >= 7 {
             unlockAchievement(id: "night_owl", progress: lateCheckIns)
         }
-        
+
         // Weekend Warrior - 10 weekends with all habits completed
         let weekendCount = countPerfectWeekends(habits: habits)
+        updateProgress(id: "weekend_warrior", progress: weekendCount)
         if weekendCount >= 10 {
             unlockAchievement(id: "weekend_warrior", progress: weekendCount)
         }
-        
+
         // All Habits in One Day
         if checkAllHabitsInOneDay(habits: habits) {
             unlockAchievement(id: "all_habits_day", progress: 1)
         }
-        
+
         // Comeback Kid - rebuild a streak after losing it
         if checkComebackKid(habits: habits) {
             unlockAchievement(id: "comeback_kid", progress: 1)
         }
-        
+
         // No Skip Month - complete at least one habit every day for 30 days
         if checkNoSkipMonth(checkIns: checkIns) {
             unlockAchievement(id: "no_skip_month", progress: 1)
         }
-        
+
         // Goal Crusher - reach 10 weekly/monthly goals
         let goalsCrushed = countGoalsCrushed(habits: habits)
+        updateProgress(id: "goal_crusher", progress: goalsCrushed)
         if goalsCrushed >= 10 {
             unlockAchievement(id: "goal_crusher", progress: goalsCrushed)
         }
-        
+
         // Overachiever - exceed goals by 150% for 50 times
         let overachievements = countOverachievements(habits: habits)
+        updateProgress(id: "overachiever", progress: overachievements)
         if overachievements >= 50 {
             unlockAchievement(id: "overachiever", progress: overachievements)
         }
@@ -255,43 +282,45 @@ class AchievementManager: ObservableObject {
         // Calculate days since first check-in
         guard let firstCheckIn = checkIns.min(by: { $0.date < $1.date }) else { return }
         let daysSinceStart = Calendar.current.dateComponents([.day], from: firstCheckIn.date, to: Date()).day ?? 0
-        
-        if daysSinceStart >= 7 {
-            unlockAchievement(id: "one_week", progress: daysSinceStart)
+
+        // Always update progress for milestone achievements
+        let milestoneIds = ["one_week", "one_month", "three_months", "six_months", "one_year", "two_years"]
+        for id in milestoneIds {
+            updateProgress(id: id, progress: daysSinceStart)
         }
-        if daysSinceStart >= 30 {
-            unlockAchievement(id: "one_month", progress: daysSinceStart)
-        }
-        if daysSinceStart >= 90 {
-            unlockAchievement(id: "three_months", progress: daysSinceStart)
-        }
-        if daysSinceStart >= 180 {
-            unlockAchievement(id: "six_months", progress: daysSinceStart)
-        }
-        if daysSinceStart >= 365 {
-            unlockAchievement(id: "one_year", progress: daysSinceStart)
-        }
-        if daysSinceStart >= 730 {
-            unlockAchievement(id: "two_years", progress: daysSinceStart)
-        }
-        
+
+        if daysSinceStart >= 7 { unlockAchievement(id: "one_week", progress: daysSinceStart) }
+        if daysSinceStart >= 30 { unlockAchievement(id: "one_month", progress: daysSinceStart) }
+        if daysSinceStart >= 90 { unlockAchievement(id: "three_months", progress: daysSinceStart) }
+        if daysSinceStart >= 180 { unlockAchievement(id: "six_months", progress: daysSinceStart) }
+        if daysSinceStart >= 365 { unlockAchievement(id: "one_year", progress: daysSinceStart) }
+        if daysSinceStart >= 730 { unlockAchievement(id: "two_years", progress: daysSinceStart) }
+
         // Habit Master - complete at least one habit for 100 days straight
-        if habits.contains(where: { $0.currentStreak >= 100 }) {
-            unlockAchievement(id: "habit_master", progress: 1)
+        let maxCurrentStreak = habits.map { $0.currentStreak }.max() ?? 0
+        updateProgress(id: "habit_master", progress: min(maxCurrentStreak, 100))
+        if maxCurrentStreak >= 100 {
+            unlockAchievement(id: "habit_master", progress: 100)
         }
-        
+
         // Dedication - maintain 3+ active habits for 90 days
+        if habits.count >= 3 {
+            updateProgress(id: "dedication", progress: min(daysSinceStart, 90))
+        }
         if habits.count >= 3 && daysSinceStart >= 90 {
-            unlockAchievement(id: "dedication", progress: 1)
+            unlockAchievement(id: "dedication", progress: 90)
         }
-        
+
         // Resilient - rebuild a streak 5 times
-        if countStreakRebuilds(habits: habits) >= 5 {
-            unlockAchievement(id: "resilient", progress: countStreakRebuilds(habits: habits))
+        let rebuilds = countStreakRebuilds(habits: habits)
+        updateProgress(id: "resilient", progress: rebuilds)
+        if rebuilds >= 5 {
+            unlockAchievement(id: "resilient", progress: rebuilds)
         }
-        
+
         // Legendary Status - unlock 40 other achievements
         let unlockedCount = unlockedAchievements.filter { $0.unlockedAt != nil && $0.id != "legendary_status" }.count
+        updateProgress(id: "legendary_status", progress: unlockedCount)
         if unlockedCount >= 40 {
             unlockAchievement(id: "legendary_status", progress: unlockedCount)
         }
@@ -301,7 +330,6 @@ class AchievementManager: ObservableObject {
     
     private func checkSpecialAchievements(habits: [Habit], checkIns: [CheckIn]) {
         let calendar = Calendar.current
-        let today = Date()
         
         // New Year New Me - create a habit on Jan 1st
         if let firstHabit = habits.min(by: { $0.createdAt < $1.createdAt }) {
@@ -331,28 +359,52 @@ class AchievementManager: ObservableObject {
         
         // Multitasker - complete 5+ habits in the same day
         let maxHabitsInDay = countMaxHabitsInOneDay(checkIns: checkIns)
+        updateProgress(id: "multitasker", progress: maxHabitsInDay)
         if maxHabitsInDay >= 5 {
             unlockAchievement(id: "multitasker", progress: maxHabitsInDay)
         }
-        
+
         // Speed Demon - complete 10 check-ins within 1 hour
         if checkSpeedDemon(checkIns: checkIns) {
             unlockAchievement(id: "speed_demon", progress: 10)
         }
-        
+
+        // Birthday Celebration - complete a habit on the app's anniversary (1 year since first habit)
+        if let firstHabit = habits.min(by: { $0.createdAt < $1.createdAt }) {
+            let firstDate = calendar.dateComponents([.month, .day], from: firstHabit.createdAt)
+            let hasBirthdayCheckIn = checkIns.contains { checkIn in
+                let checkInDate = calendar.dateComponents([.month, .day, .year], from: checkIn.date)
+                let firstYear = calendar.component(.year, from: firstHabit.createdAt)
+                return checkInDate.month == firstDate.month
+                    && checkInDate.day == firstDate.day
+                    && (checkInDate.year ?? 0) > firstYear
+            }
+            if hasBirthdayCheckIn {
+                unlockAchievement(id: "birthday_celebration", progress: 1)
+            }
+        }
+
+        // Social Butterfly - have 7+ different active habits
+        updateProgress(id: "social_butterfly", progress: habits.count)
+        if habits.count >= 7 {
+            unlockAchievement(id: "social_butterfly", progress: habits.count)
+        }
+
         // Collector - unlock 25 achievements
         let collectedCount = unlockedAchievements.filter { $0.unlockedAt != nil }.count
+        updateProgress(id: "collector", progress: collectedCount)
         if collectedCount >= 25 {
             unlockAchievement(id: "collector", progress: collectedCount)
         }
-        
+
         // Perfectionist - maintain 100% completion rate for 30 days
         if checkPerfectionist(habits: habits) {
             unlockAchievement(id: "perfectionist", progress: 1)
         }
-        
+
         // Unlock All - unlock all other 49 achievements
         let allUnlockedCount = unlockedAchievements.filter { $0.unlockedAt != nil && $0.id != "unlock_all" }.count
+        updateProgress(id: "unlock_all", progress: allUnlockedCount)
         if allUnlockedCount >= 49 {
             unlockAchievement(id: "unlock_all", progress: 49)
         }
@@ -572,58 +624,90 @@ class AchievementManager: ObservableObject {
     
     // MARK: - Unlock Achievement
     
+    /// Updates progress and unlocks the achievement if the requirement is met.
     private func unlockAchievement(id: String, progress: Int) {
         let achievement = getOrCreateAchievement(id: id)
-        
+
         // Update progress
         achievement.progress = progress
-        
+
         // Check if should unlock
         guard achievement.unlockedAt == nil,
               let definition = AchievementDefinition.definition(for: id),
               progress >= definition.requirement else {
             return
         }
-        
+
         // Unlock!
         achievement.unlockedAt = Date()
-        
+
         // Show animation if not notified
         if !achievement.notified {
             achievement.notified = true
             showUnlockAnimation(for: definition)
         }
     }
+
+    /// Updates progress only, without unlocking.
+    private func updateProgress(id: String, progress: Int) {
+        let achievement = getOrCreateAchievement(id: id)
+        achievement.progress = progress
+    }
     
     private func showUnlockAnimation(for definition: AchievementDefinition) {
+        if showingUnlockAnimation {
+            // Already showing one - queue this for later
+            pendingUnlockQueue.append(definition)
+            return
+        }
+
         recentlyUnlockedAchievement = definition
         showingUnlockAnimation = true
-        
-        // Auto-hide after 3 seconds
-        Task {
-            try? await Task.sleep(nanoseconds: 3_000_000_000)
-            await MainActor.run {
-                showingUnlockAnimation = false
-            }
-        }
+    }
+
+    /// Call this when user dismisses the unlock view or auto-hide triggers.
+    /// Returns the next queued achievement if available.
+    func dismissCurrentUnlock() {
+        showingUnlockAnimation = false
+        recentlyUnlockedAchievement = nil
+    }
+
+    /// Returns and removes the next pending achievement from the queue, or nil.
+    func dequeueNextUnlock() -> AchievementDefinition? {
+        guard !pendingUnlockQueue.isEmpty else { return nil }
+        return pendingUnlockQueue.removeFirst()
     }
     
     // MARK: - Get Achievement Progress
     
-    func getAchievementProgress(id: String) -> Achievement? {
-        return unlockedAchievements.first { $0.id == id } ?? getOrCreateAchievement(id: id)
+    func getAchievementProgress(id: String) -> Achievement {
+        if let existing = unlockedAchievements.first(where: { $0.id == id }) {
+            return existing
+        }
+
+        let predicate = #Predicate<Achievement> { achievement in
+            achievement.id == id
+        }
+
+        var descriptor = FetchDescriptor(predicate: predicate)
+        descriptor.fetchLimit = 1
+
+        if let existing = try? modelContext.fetch(descriptor).first {
+            return existing
+        }
+
+        return Achievement(id: id)
     }
-    
+
     func isUnlocked(id: String) -> Bool {
         return getAchievementProgress(id: id).unlockedAt != nil
     }
-    
+
     func progressPercentage(for id: String) -> Double {
-        guard let definition = AchievementDefinition.definition(for: id),
-              let achievement = getAchievementProgress(id: id) else {
+        guard let definition = AchievementDefinition.definition(for: id) else {
             return 0
         }
-        
+        let achievement = getAchievementProgress(id: id)
         return min(Double(achievement.progress) / Double(definition.requirement), 1.0)
     }
 }

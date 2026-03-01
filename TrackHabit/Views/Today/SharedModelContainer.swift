@@ -13,10 +13,12 @@ class SharedModelContainer {
             CheckIn.self,
             Achievement.self
         ])
+        let localConfig = ModelConfiguration(schema: schema, cloudKitDatabase: .none)
         
         do {
-            // Simplest possible configuration
-            container = try ModelContainer(for: schema)
+            // Force a local-only store; the app's iCloud entitlements should not
+            // implicitly turn this SwiftData container into a CloudKit-backed store.
+            container = try ModelContainer(for: schema, configurations: [localConfig])
             print("✅ ModelContainer created successfully")
         } catch {
             print("❌ Failed to create ModelContainer")
@@ -25,7 +27,11 @@ class SharedModelContainer {
             
             // Try in-memory as last resort
             do {
-                let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+                let config = ModelConfiguration(
+                    schema: schema,
+                    isStoredInMemoryOnly: true,
+                    cloudKitDatabase: .none
+                )
                 container = try ModelContainer(for: schema, configurations: [config])
                 print("⚠️ Using in-memory storage (data will not persist)")
             } catch {

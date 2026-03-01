@@ -63,7 +63,7 @@ struct CompletionAnimationView: View {
 }
 
 // MARK: - Confetti Particle
-struct ConfettiPiece: Shape {
+struct ConfettiParticleShape: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         path.addRect(rect)
@@ -72,22 +72,46 @@ struct ConfettiPiece: Shape {
 }
 
 struct ConfettiView: View {
+    private struct Particle: Identifiable {
+        let id: Int
+        let color: Color
+        let xOffset: CGFloat
+        let yOffset: CGFloat
+        let rotation: Double
+        let duration: Double
+        let delay: Double
+    }
+
     @State private var animate = false
-    let colors: [Color] = [.red, .blue, .green, .yellow, .orange, .purple, .pink]
+    private let particles: [Particle] = (0..<50).map { index in
+        let colors: [Color] = [.red, .blue, .green, .yellow, .orange, .purple, .pink]
+
+        return Particle(
+            id: index,
+            color: colors.randomElement() ?? .blue,
+            xOffset: CGFloat.random(in: -200...200),
+            yOffset: CGFloat.random(in: -400...400),
+            rotation: Double.random(in: 0...360),
+            duration: Double.random(in: 1...2),
+            delay: Double(index) * 0.02
+        )
+    }
     
     var body: some View {
         ZStack {
-            ForEach(0..<50, id: \.self) { index in
-                ConfettiPiece()
-                    .fill(colors.randomElement() ?? .blue)
+            ForEach(particles) { particle in
+                ConfettiParticleShape()
+                    .fill(particle.color)
                     .frame(width: 10, height: 10)
-                    .offset(x: animate ? CGFloat.random(in: -200...200) : 0,
-                           y: animate ? CGFloat.random(in: -400...400) : 0)
-                    .rotationEffect(.degrees(animate ? Double.random(in: 0...360) : 0))
+                    .offset(
+                        x: animate ? particle.xOffset : 0,
+                        y: animate ? particle.yOffset : 0
+                    )
+                    .rotationEffect(.degrees(animate ? particle.rotation : 0))
                     .opacity(animate ? 0 : 1)
                     .animation(
-                        .easeOut(duration: Double.random(in: 1...2))
-                        .delay(Double(index) * 0.02),
+                        .easeOut(duration: particle.duration)
+                            .delay(particle.delay),
                         value: animate
                     )
             }

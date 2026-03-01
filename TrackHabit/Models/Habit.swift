@@ -9,7 +9,7 @@ final class Habit {
     var colorHex: String // preset color as hex
     var duration: String // "≤1 min"
     var frequency: String // "daily" for MVP
-    var daysOfWeek: [Int]? // Optional: 0 = Sunday, 6 = Saturday
+    var daysOfWeekData: Data? // Backing storage for optional weekday selection
     var createdAt: Date
     var isArchived: Bool
     var reminderEnabled: Bool
@@ -19,7 +19,7 @@ final class Habit {
     
     // Daily repetitions (для звичок що виконуються кілька разів на день)
     var dailyRepetitions: Int = 1 // Значення за замовчуванням для міграції
-    var reminderTimes: [Date]? = nil // Опціональне, за замовчуванням nil
+    var reminderTimesData: Data? = nil // Backing storage for multiple reminder times
     
     // Goals
     var weeklyGoal: Int? // Target number of completions per week
@@ -27,7 +27,7 @@ final class Habit {
     var yearlyGoal: Int? // Target number of completions per year
 
     @Relationship(deleteRule: .cascade, inverse: \CheckIn.habit)
-    var checkIns: [CheckIn]?
+    var checkInRecords: [CheckIn] = []
 
     init(
         id: UUID = UUID(),
@@ -55,7 +55,7 @@ final class Habit {
         self.colorHex = colorHex
         self.duration = duration
         self.frequency = frequency
-        self.daysOfWeek = daysOfWeek
+        self.daysOfWeekData = Self.encode(daysOfWeek)
         self.createdAt = createdAt
         self.isArchived = isArchived
         self.reminderEnabled = reminderEnabled
@@ -76,7 +76,7 @@ final class Habit {
         
         // Set up multiple reminder times if needed
         if let times = reminderTimes {
-            self.reminderTimes = times
+            self.reminderTimesData = Self.encode(times)
         } else if dailyRepetitions > 1 {
             // Створюємо дефолтні часи: 9:00, 14:00, 20:00 і т.д.
             var defaultTimes: [Date] = []
@@ -90,9 +90,9 @@ final class Habit {
                     defaultTimes.append(time)
                 }
             }
-            self.reminderTimes = defaultTimes
+            self.reminderTimesData = Self.encode(defaultTimes)
         } else {
-            self.reminderTimes = nil
+            self.reminderTimesData = nil
         }
         
         self.notes = notes
@@ -100,6 +100,31 @@ final class Habit {
         self.weeklyGoal = weeklyGoal
         self.monthlyGoal = monthlyGoal
         self.yearlyGoal = yearlyGoal
+    }
+
+    var daysOfWeek: [Int]? {
+        get { Self.decode([Int].self, from: daysOfWeekData) }
+        set { daysOfWeekData = Self.encode(newValue) }
+    }
+
+    var reminderTimes: [Date]? {
+        get { Self.decode([Date].self, from: reminderTimesData) }
+        set { reminderTimesData = Self.encode(newValue) }
+    }
+
+    var checkIns: [CheckIn]? {
+        get { checkInRecords.isEmpty ? nil : checkInRecords }
+        set { checkInRecords = newValue ?? [] }
+    }
+
+    private static func encode<T: Encodable>(_ value: T?) -> Data? {
+        guard let value else { return nil }
+        return try? JSONEncoder().encode(value)
+    }
+
+    private static func decode<T: Decodable>(_ type: T.Type, from data: Data?) -> T? {
+        guard let data else { return nil }
+        return try? JSONDecoder().decode(type, from: data)
     }
 }
 

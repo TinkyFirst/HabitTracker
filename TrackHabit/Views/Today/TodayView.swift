@@ -98,7 +98,22 @@ struct TodayView: View {
             }
             .overlay {
                 if showingAchievementUnlock, let def = unlockedAchievementDef {
-                    AchievementUnlockView(definition: def, isShowing: $showingAchievementUnlock)
+                    AchievementUnlockView(definition: def, isShowing: Binding(
+                        get: { showingAchievementUnlock },
+                        set: { newValue in
+                            if !newValue {
+                                dismissAchievementAndShowNext()
+                            }
+                        }
+                    ))
+                    .onAppear {
+                        // Auto-hide after 5 seconds
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            if showingAchievementUnlock {
+                                dismissAchievementAndShowNext()
+                            }
+                        }
+                    }
                 }
             }
             .onChange(of: newlyCreatedHabitId) { _, newId in
@@ -451,6 +466,19 @@ struct TodayView: View {
         if manager.showingUnlockAnimation, let def = manager.recentlyUnlockedAchievement {
             unlockedAchievementDef = def
             showingAchievementUnlock = true
+        }
+    }
+
+    private func dismissAchievementAndShowNext() {
+        showingAchievementUnlock = false
+        achievementManager?.dismissCurrentUnlock()
+
+        // Check if there's a next queued achievement
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            if let nextDef = achievementManager?.dequeueNextUnlock() {
+                unlockedAchievementDef = nextDef
+                showingAchievementUnlock = true
+            }
         }
     }
 

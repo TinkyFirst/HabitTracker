@@ -1,6 +1,4 @@
 import SwiftUI
-
-import SwiftUI
 import SwiftData
 
 // MARK: - Animated Habit Row

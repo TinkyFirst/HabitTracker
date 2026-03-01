@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ACHV100 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV000 /* Achievement.swift */; };
+		ACHV101 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV001 /* AchievementManager.swift */; };
+		ACHV102 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV002 /* AchievementsView.swift */; };
+		ACHV103 /* AchievementViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV003 /* AchievementViews.swift */; };
+		ACHV104 /* AchievementComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV004 /* AchievementComponents.swift */; };
+		ACHV105 /* AchievementLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV005 /* AchievementLocalization.swift */; };
 		ASSET001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ASSET000 /* Assets.xcassets */; };
-		B508ABD92F0700010057D2CE /* GOALS_QUICK_REFERENCE.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508ABD82F0700010057D2CE /* GOALS_QUICK_REFERENCE.swift */; };
 		B508ABE22F0709BB0057D2CE /* MotivationalMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508ABE12F0709BB0057D2CE /* MotivationalMessages.swift */; };
 		B508ABE42F0709DD0057D2CE /* HabitAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508ABE32F0709DD0057D2CE /* HabitAnimations.swift */; };
 		B508ABE62F070DD80057D2CE /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508ABE52F070DD80057D2CE /* LanguageManager.swift */; };
@@ -17,9 +22,7 @@
 		B5755C0A2F00A9A10088DCB0 /* NewFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5755C092F00A9A10088DCB0 /* NewFeatures.swift */; };
 		B5D37D1D2F09736100CB37A9 /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D37D1C2F09736100CB37A9 /* AppLogo.swift */; };
 		B5D37D212F0979DF00CB37A9 /* AppAnimatedBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D37D202F0979DF00CB37A9 /* AppAnimatedBackground.swift */; };
-		B5D37D252F09B64100CB37A9 /* IAP_CODE_DOCUMENTATION.md in Resources */ = {isa = PBXBuildFile; fileRef = B5D37D242F09B64100CB37A9 /* IAP_CODE_DOCUMENTATION.md */; };
 		B5DBFF052F00867E005FE9AA /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DBFF042F00867E005FE9AA /* SharedModelContainer.swift */; };
-		B5DBFF0B2F0086EC005FE9AA /* WIDGET_SETUP_README.md in Resources */ = {isa = PBXBuildFile; fileRef = B5DBFF0A2F0086EC005FE9AA /* WIDGET_SETUP_README.md */; };
 		B5DBFF542F009852005FE9AA /* WidgetHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DBFF0C2F0086F6005FE9AA /* WidgetHelpers.swift */; };
 		COMP001 /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = COMP000 /* GlassCard.swift */; };
 		MAIN001 /* TrackHabitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = MAIN000 /* TrackHabitApp.swift */; };
@@ -38,11 +41,6 @@
 		VIEW012 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = VIEW013 /* PaywallView.swift */; };
 		VIEW014 /* PaywallViewWithStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = VIEW015 /* PaywallViewWithStore.swift */; };
 		VIEW016 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = VIEW017 /* MainTabView.swift */; };
-		ACHV100 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV000 /* Achievement.swift */; };
-		ACHV101 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV001 /* AchievementManager.swift */; };
-		ACHV102 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV002 /* AchievementsView.swift */; };
-		ACHV103 /* AchievementViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV003 /* AchievementViews.swift */; };
-		ACHV104 /* AchievementComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACHV004 /* AchievementComponents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,30 +57,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		ASSET000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B508ABD82F0700010057D2CE /* GOALS_QUICK_REFERENCE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GOALS_QUICK_REFERENCE.swift; sourceTree = "<group>"; };
-		B508ABE12F0709BB0057D2CE /* MotivationalMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationalMessages.swift; sourceTree = "<group>"; };
-		B508ABE32F0709DD0057D2CE /* HabitAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAnimations.swift; sourceTree = "<group>"; };
-		B508ABE52F070DD80057D2CE /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		ACHV000 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		ACHV001 /* AchievementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
 		ACHV002 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
 		ACHV003 /* AchievementViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementViews.swift; sourceTree = "<group>"; };
 		ACHV004 /* AchievementComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementComponents.swift; sourceTree = "<group>"; };
+		ACHV005 /* AchievementLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementLocalization.swift; sourceTree = "<group>"; };
+		ASSET000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B508ABE12F0709BB0057D2CE /* MotivationalMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationalMessages.swift; sourceTree = "<group>"; };
+		B508ABE32F0709DD0057D2CE /* HabitAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAnimations.swift; sourceTree = "<group>"; };
+		B508ABE52F070DD80057D2CE /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		B5755C052F00A92C0088DCB0 /* ProChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProChartsView.swift; sourceTree = "<group>"; };
 		B5755C072F00A9710088DCB0 /* AnimatedComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedComponents.swift; sourceTree = "<group>"; };
 		B5755C092F00A9A10088DCB0 /* NewFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeatures.swift; sourceTree = "<group>"; };
 		B5AE8A552F1532BF00FABF90 /* group.trackhabitRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = group.trackhabitRelease.entitlements; sourceTree = "<group>"; };
 		B5D37D1C2F09736100CB37A9 /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		B5D37D202F0979DF00CB37A9 /* AppAnimatedBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnimatedBackground.swift; sourceTree = "<group>"; };
-		B5D37D242F09B64100CB37A9 /* IAP_CODE_DOCUMENTATION.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = IAP_CODE_DOCUMENTATION.md; sourceTree = "<group>"; };
 		B5DBFEFE2F008643005FE9AA /* HabitWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetBundle.swift; sourceTree = "<group>"; };
 		B5DBFF002F008651005FE9AA /* HabitWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetProvider.swift; sourceTree = "<group>"; };
 		B5DBFF022F008676005FE9AA /* HabitWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgets.swift; sourceTree = "<group>"; };
 		B5DBFF042F00867E005FE9AA /* SharedModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModelContainer.swift; sourceTree = "<group>"; };
 		B5DBFF062F0086A4005FE9AA /* HabitIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitIntents.swift; sourceTree = "<group>"; };
 		B5DBFF082F0086C0005FE9AA /* InteractiveHabitWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveHabitWidgets.swift; sourceTree = "<group>"; };
-		B5DBFF0A2F0086EC005FE9AA /* WIDGET_SETUP_README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = WIDGET_SETUP_README.md; sourceTree = "<group>"; };
 		B5DBFF0C2F0086F6005FE9AA /* WidgetHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetHelpers.swift; sourceTree = "<group>"; };
 		B5DBFF0E2F008723005FE9AA /* LockScreenWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenWidgets.swift; sourceTree = "<group>"; };
 		B5DBFF102F00874B005FE9AA /* StandByWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandByWidgets.swift; sourceTree = "<group>"; };
@@ -163,7 +159,6 @@
 				THEMES /* Theme */,
 				SERVS /* Services */,
 				ASSET000 /* Assets.xcassets */,
-				B5DBFF0A2F0086EC005FE9AA /* WIDGET_SETUP_README.md */,
 				B5DBFF0C2F0086F6005FE9AA /* WidgetHelpers.swift */,
 			);
 			path = TrackHabit;
@@ -180,6 +175,7 @@
 				ACHV002 /* AchievementsView.swift */,
 				ACHV003 /* AchievementViews.swift */,
 				ACHV004 /* AchievementComponents.swift */,
+				ACHV005 /* AchievementLocalization.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -261,7 +257,6 @@
 			children = (
 				VIEW013 /* PaywallView.swift */,
 				VIEW015 /* PaywallViewWithStore.swift */,
-				B5D37D242F09B64100CB37A9 /* IAP_CODE_DOCUMENTATION.md */,
 			);
 			path = Paywall;
 			sourceTree = "<group>";
@@ -277,7 +272,6 @@
 				VIEWINS /* Insights */,
 				VIEWSET /* Settings */,
 				VIEWPAY /* Paywall */,
-				B508ABD82F0700010057D2CE /* GOALS_QUICK_REFERENCE.swift */,
 				B508ABE12F0709BB0057D2CE /* MotivationalMessages.swift */,
 				B508ABE32F0709DD0057D2CE /* HabitAnimations.swift */,
 			);
@@ -370,9 +364,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5DBFF0B2F0086EC005FE9AA /* WIDGET_SETUP_README.md in Resources */,
 				ASSET001 /* Assets.xcassets in Resources */,
-				B5D37D252F09B64100CB37A9 /* IAP_CODE_DOCUMENTATION.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,7 +387,6 @@
 				THEME001 /* AppTheme.swift in Sources */,
 				COMP001 /* GlassCard.swift in Sources */,
 				B5755C062F00A92C0088DCB0 /* ProChartsView.swift in Sources */,
-				B508ABD92F0700010057D2CE /* GOALS_QUICK_REFERENCE.swift in Sources */,
 				VIEW001 /* OnboardingView.swift in Sources */,
 				VIEW002 /* TodayView.swift in Sources */,
 				VIEW004 /* AddHabitView.swift in Sources */,
@@ -416,6 +407,7 @@
 				ACHV102 /* AchievementsView.swift in Sources */,
 				ACHV103 /* AchievementViews.swift in Sources */,
 				ACHV104 /* AchievementComponents.swift in Sources */,
+				ACHV105 /* AchievementLocalization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,7 +544,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TrackHabit/TrackHabit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Habbit Tracker";
@@ -582,7 +574,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = group.trackhabitRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Habbit Tracker";
